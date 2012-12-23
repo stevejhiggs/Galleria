@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<a href="@Url.Action("Upload", "Home")" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>Add Pictures</a>
+
+<div class="row">
+    <ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }">
+    </ul>
+    <script type="text/html" id="picture-template">
+        <li><img data-bind="attr: { src: Url }" width="200" height="200" /></li>
+    </script>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.signalR-1.0.0-alpha2.min.js" type="text/javascript"></script>
+    <script src="/signalr/hubs" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            // Proxy created on the fly          
+            var pictureprocesshub = $.connection.pictureProcessHub;
+
+            // Declare a function on the chat hub so the server can invoke it          
+            pictureprocesshub.client.pictureprocessed = function (image) {
+                viewModel.processedImages.push(image);
+            };
+
+            // Start the connection
+            $.connection.hub.start();
+        });
+
+        var viewModel = { processedImages: ko.observableArray([]) }
+        ko.applyBindings(viewModel);
+    </script>
+}
