@@ -5,7 +5,7 @@ namespace Galleria.Hubs
 {
     public class PictureProcessHub : Hub
     {
-        public void PictureProcessComplete(ImageProcessingCompleteViewModel imageInfo)
+        public void PictureProcessComplete(ProcessedImageViewModel imageInfo)
         {
             Clients.All.pictureprocessed(imageInfo);
         }

@@ -1,23 +1,34 @@
-﻿using Galleria.Hubs;
+﻿using AutoMapper;
+using Galleria.Hubs;
+using Galleria.Models;
+using Galleria.RavenDb.Controllers;
 using Galleria.ViewModels;
 using Microsoft.AspNet.SignalR;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Web;
 using System.Web.Http;
 
 namespace Galleria.Controllers
 {
-    public class FileAssemblyController : ApiController
+    public class FileAssemblyController : RavenBaseApiController
     {
-        private const string blockpath = "~/uploads/blocks/";
-        private const string imagepath = "~/uploads/";
+        private string blockpath;
+        private string mediapath;
+
+        public FileAssemblyController()
+        {
+            blockpath = ConfigurationManager.AppSettings["BlockPath"];
+            mediapath = ConfigurationManager.AppSettings["MediaPath"];
+        }
 
         // GET api/fileassembly
         public void Post(AssembleRequest item)
         {
             string mappedBlockPath = HttpContext.Current.Server.MapPath(blockpath);
-            string mappedFilePath = HttpContext.Current.Server.MapPath(imagepath);
+            string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);
             string destinationFile = mappedFilePath + item.filename;
 
             List<string> sourcefiles = new List<string>();
@@ -45,11 +56,13 @@ namespace Galleria.Controllers
                 File.Delete(srcFileName);
             }
 
+            //write to raven
+            UploadInformation info = new UploadInformation{ Id = Guid.NewGuid().ToString(), Filename = item.filename, Name = item.filename};
+            RavenSession.Store(info);
+
             //signal the hub that we are done
             var context = GlobalHost.ConnectionManager.GetHubContext<PictureProcessHub>();
-            var model = new ImageProcessingCompleteViewModel();
-            model.Url = VirtualPathUtility.ToAbsolute(imagepath + item.filename);
-            context.Clients.All.pictureprocessed(model);
+            context.Clients.All.pictureprocessed(Mapper.Map<ProcessedImageViewModel>(info));
         }
     }
 

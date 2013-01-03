@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Galleria.ViewModels
 {
-    public class ImageProcessingCompleteViewModel
+    public class ProcessedImageViewModel
     {
         public string Url { get; set; }
     }

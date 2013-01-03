@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Galleria.RavenDb.Controllers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace Galleria.Controllers
 {
-    public class UploadingController : ApiController
+    public class UploadingController : RavenBaseApiController
     {
         public Task<IEnumerable<FileDesc>> Post()
         {
@@ -34,7 +34,7 @@ namespace Galleria.Controllers
 
                     var fileInfo = streamProvider.FileData.Select(i =>
                     {
-                                            //spit the info given to us by the client
+                        //spit the info given to us by the client
                         string[] clientoptions = i.Headers.ContentDisposition.Name.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
                         string clientFilenumString = Regex.Replace(clientoptions[0], "[^\\d]", "");
                         string clientBlocknumString = Regex.Replace(clientoptions[1], "[^\\d]", "");

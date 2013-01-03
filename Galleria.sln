@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{96647C
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galleria.RavenDb", "Galleria.RavenDb\Galleria.RavenDb.csproj", "{C4004D42-6062-428E-8C40-BA897053C9E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{9E24C1AD-EABF-432F-87C6-5C4F2F548693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E24C1AD-EABF-432F-87C6-5C4F2F548693}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E24C1AD-EABF-432F-87C6-5C4F2F548693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4004D42-6062-428E-8C40-BA897053C9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4004D42-6062-428E-8C40-BA897053C9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4004D42-6062-428E-8C40-BA897053C9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4004D42-6062-428E-8C40-BA897053C9E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

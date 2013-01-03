@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IList<Galleria.ViewModels.ProcessedImageViewModel>
+
+@{
     ViewBag.Title = "Index";
 }
 <a href="@Url.Action("Upload", "Home")" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>Add Pictures</a>
@@ -31,5 +33,18 @@
 
         var viewModel = { processedImages: ko.observableArray([]) }
         ko.applyBindings(viewModel);
+
+        var image = new Object();
+        @foreach(var upload in Model)
+        {
+            @:image = new Object();
+                    @:image.Url = '@upload.Url';
+                    @:viewModel.processedImages.push(image);    
+            
+        }
+    </script>
+
+    <script type="text/javascript">
+        
     </script>
 }
