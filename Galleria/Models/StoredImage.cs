@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace Galleria.ImageProcessing
+namespace Galleria.Models
 {
-    public class ExtractedImageInformation
+    public class StoredImage
     {
-        public string FileName { get; set; }
-        public string FilePath { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
-        public string ThumbnailPath { get; set; }
+        public string Filename { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public int Orientation { get; set; }

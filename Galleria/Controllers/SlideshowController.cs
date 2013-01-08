@@ -15,7 +15,7 @@ namespace Galleria.Controllers
 
         public ActionResult Index()
         {
-            var uploadInfo = RavenSession.Query<UploadInformation>().Take(500).ToArray();
+            var uploadInfo = RavenSession.Query<StoredImage>().Take(500).ToArray();
             IList<ProcessedImageViewModel> existingMedia = new List<ProcessedImageViewModel>();
             foreach (var upload in uploadInfo)
             {

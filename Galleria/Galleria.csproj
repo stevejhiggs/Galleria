@@ -164,7 +164,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\PictureProcessHub.cs" />
-    <Compile Include="Models\UploadInformation.cs" />
+    <Compile Include="Models\StoredImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ProcessedImageViewModel.cs" />
   </ItemGroup>

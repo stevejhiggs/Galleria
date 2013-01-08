@@ -62,13 +62,16 @@ namespace Galleria.Controllers
 
             //following should just be added to a processing queue
 
-            //write to raven
-            UploadInformation info = new UploadInformation{ Id = Guid.NewGuid().ToString(), Filename = item.filename, Name = item.filename};
-            RavenSession.Store(info);
-
             //process the image
-            ThumbnailGenerator generator = new ThumbnailGenerator();
-            generator.GenerateThumbnail(mappedFilePath + item.filename, mappedThumbnailPath + item.filename);
+            InformationExtractor extractor = new InformationExtractor();
+            extractor.ImagePathBase = mappedFilePath;
+            extractor.ThumbnailPathBase = mappedThumbnailPath;
+            extractor.ThumbnailMaxHeight = 200;
+            ExtractedImageInformation exInfo = extractor.GetImageInformation(item.filename);
+
+            //write to raven
+            StoredImage info = Mapper.Map<StoredImage>(exInfo);
+            RavenSession.Store(info);
 
             //signal the hub that we are done
             var context = GlobalHost.ConnectionManager.GetHubContext<PictureProcessHub>();
