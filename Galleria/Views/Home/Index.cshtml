@@ -4,12 +4,13 @@
     ViewBag.Title = "Index";
 }
 <a href="@Url.Action("Upload", "Home")" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i>Add Pictures</a>
+<a href="@Url.Action("Index", "Slideshow")" class="btn">Slideshow</a>
 
 <div class="row">
     <ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }">
     </ul>
     <script type="text/html" id="picture-template">
-        <li><img data-bind="attr: { src: Url }" width="200" height="200" /></li>
+        <li><img data-bind="attr: { src: ThumbnailUrl }" /></li>
     </script>
 </div>
 
@@ -39,6 +40,7 @@
         {
             @:image = new Object();
                     @:image.Url = '@upload.Url';
+                    @:image.ThumbnailUrl = '@upload.ThumbnailUrl';
                     @:viewModel.processedImages.push(image);    
             
         }

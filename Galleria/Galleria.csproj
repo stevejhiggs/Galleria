@@ -48,25 +48,34 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.1.0.0-alpha2\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.1.0.0-rc1\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Hosting.AspNet">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Hosting.AspNet.1.0.0-alpha2\lib\net45\Microsoft.AspNet.SignalR.Hosting.AspNet.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Owin.1.0.0-rc1\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Hosting.Common">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Hosting.Common.1.0.0-alpha2\lib\net40\Microsoft.AspNet.SignalR.Hosting.Common.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.1.0.0-rc1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.1.0.0-rc1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Abstractions">
-      <HintPath>..\packages\RavenDB.Client.2.0.2181-Unstable\lib\net40\Raven.Abstractions.dll</HintPath>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\packages\RavenDB.Client.2.0.2181-Unstable\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+    <Reference Include="Raven.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.2.0.2230\lib\net40\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=2.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.2.0.2230\lib\net40\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -145,11 +154,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MappingConfig.cs" />
-    <Compile Include="App_Start\RegisterHubs.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FileAssemblyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SlideshowController.cs" />
     <Compile Include="Controllers\UploadingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -165,6 +174,25 @@
     <Content Include="Content\Bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="Content\Bootstrap\img\glyphicons-halflings.png" />
     <Content Include="Content\Bootstrap\js\bootstrap.js" />
+    <Content Include="Content\Supersized\css\supersized.css" />
+    <Content Include="Content\Supersized\img\back.png" />
+    <Content Include="Content\Supersized\img\bg-black.png" />
+    <Content Include="Content\Supersized\img\bg-hover.png" />
+    <Content Include="Content\Supersized\img\button-tray-down.png" />
+    <Content Include="Content\Supersized\img\button-tray-up.png" />
+    <Content Include="Content\Supersized\img\forward.png" />
+    <Content Include="Content\Supersized\img\nav-bg.png" />
+    <Content Include="Content\Supersized\img\nav-dot.png" />
+    <Content Include="Content\Supersized\img\pause.png" />
+    <Content Include="Content\Supersized\img\play.png" />
+    <Content Include="Content\Supersized\img\progress-back.png" />
+    <Content Include="Content\Supersized\img\progress-bar.png" />
+    <Content Include="Content\Supersized\img\progress.gif" />
+    <Content Include="Content\Supersized\img\supersized-logo.png" />
+    <Content Include="Content\Supersized\img\thumb-back.png" />
+    <Content Include="Content\Supersized\img\thumb-forward.png" />
+    <Content Include="Content\Supersized\theme\supersized.shutter.css" />
+    <Content Include="Scripts\supersized.shutter.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -232,8 +260,9 @@
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.9.2.js" />
     <Content Include="Scripts\jquery-ui-1.9.2.min.js" />
-    <Content Include="Scripts\jquery.signalR-1.0.0-alpha2.js" />
-    <Content Include="Scripts\jquery.signalR-1.0.0-alpha2.min.js" />
+    <Content Include="Scripts\jquery.easing.1.3.js" />
+    <Content Include="Scripts\jquery.signalR-1.0.0-rc1.js" />
+    <Content Include="Scripts\jquery.signalR-1.0.0-rc1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -244,6 +273,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\supersized.3.2.7.min.js" />
     <Content Include="Scripts\Upload.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -259,15 +289,22 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Upload.cshtml" />
+    <Content Include="Views\Slideshow\Index.cshtml" />
+    <Content Include="Views\Shared\_Fullscreen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\Blocks\" />
+    <Folder Include="Uploads\Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Galleria.ImageProcessing\Galleria.ImageProcessing.csproj">
+      <Project>{48038b11-6f73-4ecc-88bd-b2c3aa268cdd}</Project>
+      <Name>Galleria.ImageProcessing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Galleria.RavenDb\Galleria.RavenDb.csproj">
       <Project>{c4004d42-6062-428e-8c40-ba897053c9e5}</Project>
       <Name>Galleria.RavenDb</Name>

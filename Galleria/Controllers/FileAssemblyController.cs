@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Galleria.Hubs;
+using Galleria.ImageProcessing;
 using Galleria.Models;
 using Galleria.RavenDb.Controllers;
 using Galleria.ViewModels;
@@ -17,11 +18,13 @@ namespace Galleria.Controllers
     {
         private string blockpath;
         private string mediapath;
+        private string thumbnailPath;
 
         public FileAssemblyController()
         {
             blockpath = ConfigurationManager.AppSettings["BlockPath"];
             mediapath = ConfigurationManager.AppSettings["MediaPath"];
+            thumbnailPath = ConfigurationManager.AppSettings["ThumbnailPath"];
         }
 
         // GET api/fileassembly
@@ -29,6 +32,7 @@ namespace Galleria.Controllers
         {
             string mappedBlockPath = HttpContext.Current.Server.MapPath(blockpath);
             string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);
+            string mappedThumbnailPath = HttpContext.Current.Server.MapPath(thumbnailPath);
             string destinationFile = mappedFilePath + item.filename;
 
             List<string> sourcefiles = new List<string>();
@@ -56,9 +60,15 @@ namespace Galleria.Controllers
                 File.Delete(srcFileName);
             }
 
+            //following should just be added to a processing queue
+
             //write to raven
             UploadInformation info = new UploadInformation{ Id = Guid.NewGuid().ToString(), Filename = item.filename, Name = item.filename};
             RavenSession.Store(info);
+
+            //process the image
+            ThumbnailGenerator generator = new ThumbnailGenerator();
+            generator.GenerateThumbnail(mappedFilePath + item.filename, mappedThumbnailPath + item.filename);
 
             //signal the hub that we are done
             var context = GlobalHost.ConnectionManager.GetHubContext<PictureProcessHub>();
