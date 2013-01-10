@@ -10,14 +10,15 @@
     <ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }">
     </ul>
     <script type="text/html" id="picture-template">
-        <li><img data-bind="attr: { src: ThumbnailUrl }" /></li>
+        <li><img class="lazyImage" src="@Url.Content("~/Content/Images/ImagePlaceholder.png")" data-bind="attr: { 'data-original': ThumbnailUrl }" /></li>
     </script>
 </div>
 
 @section scripts
 {
-    <script src="~/Scripts/jquery.signalR-1.0.0-alpha2.min.js" type="text/javascript"></script>
-    <script src="/signalr/hubs" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.lazyload.js"></script>
+    <script src="~/Scripts/jquery.signalR-1.0.0-rc1.min.js" type="text/javascript"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             // Proxy created on the fly          
@@ -26,27 +27,29 @@
             // Declare a function on the chat hub so the server can invoke it          
             pictureprocesshub.client.pictureprocessed = function (image) {
                 viewModel.processedImages.push(image);
+                $("img.lazyImage").lazyload();
             };
 
             // Start the connection
             $.connection.hub.start();
-        });
-
-        var viewModel = { processedImages: ko.observableArray([]) }
-        ko.applyBindings(viewModel);
-
-        var image = new Object();
-        @foreach(var upload in Model)
-        {
-            @:image = new Object();
-                    @:image.Url = '@upload.Url';
-                    @:image.ThumbnailUrl = '@upload.ThumbnailUrl';
-                    @:viewModel.processedImages.push(image);    
-            
-        }
-    </script>
-
-    <script type="text/javascript">
         
+
+            var viewModel = { processedImages: ko.observableArray([]) }
+            ko.applyBindings(viewModel);
+
+            var image = new Object();
+            @foreach(var upload in Model)
+            {
+                @:image = new Object();
+                        @:image.Url = '@upload.Url';
+                        @:image.ThumbnailUrl = '@upload.ThumbnailUrl';
+                        @:viewModel.processedImages.push(image);    
+                                    
+            }
+
+            $("img.lazyImage").lazyload({
+                effect: "fadeIn"
+            });
+        });
     </script>
 }
