@@ -1,5 +1,5 @@
 ﻿using Galleria.ViewModels;
-using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.AspNet.SignalR;
 
 namespace Galleria.Hubs
 {

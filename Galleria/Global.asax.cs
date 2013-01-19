@@ -22,8 +22,6 @@ namespace Galleria
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            // Register the default hubs route: ~/signalr/hubs
-            RouteTable.Routes.MapHubs();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             MappingConfig.SetupMappings();
