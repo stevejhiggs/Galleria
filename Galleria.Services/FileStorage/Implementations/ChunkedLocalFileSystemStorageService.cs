@@ -11,18 +11,16 @@ namespace Galleria.Services.FileStorage.Implementations
 {
     public class ChunkedLocalFileSystemStorageService : IChunkedFileStorageService
     {
-        private HttpContextBase StoredHttpContext;
         private string BlockStorageUri;
         private string FileStorageUri;
         private string BlockStoragePath;
         private string FileStoragePath;
 
 
-        public ChunkedLocalFileSystemStorageService(HttpContextBase httpContext, string blockStorageUri, string fileStorageUri)
+        public ChunkedLocalFileSystemStorageService(string blockStoragePath, string fileStoragePath, string blockStorageUri, string fileStorageUri)
         {
-            this.StoredHttpContext = httpContext;
-            BlockStoragePath = httpContext.Server.MapPath(blockStorageUri);
-            FileStoragePath = httpContext.Server.MapPath(fileStorageUri);
+            BlockStoragePath = blockStoragePath;
+            FileStoragePath = fileStoragePath;
             BlockStorageUri = VirtualPathUtility.ToAbsolute(blockStorageUri);
             FileStorageUri = VirtualPathUtility.ToAbsolute(fileStorageUri);
         }
