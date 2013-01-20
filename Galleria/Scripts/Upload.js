@@ -84,10 +84,10 @@ function upload(fileIndex, blobIndex, blobOrFile) {
         success: function (res) {
             $.each(res, function (i, item) {
                 viewModel.uploads.push(item);
-                inFlightFiles[item.clientfileindex].chunks[item.clientblobindex].serverId = item.name;
-                inFlightFiles[item.clientfileindex].chunks[item.clientblobindex].uploaded = true;
-                if (areAllBlocksUploaded(item.clientfileindex)) {
-                    sendFileCompleteMessage(item.clientfileindex);
+                inFlightFiles[item.ClientFileIndex].chunks[item.ClientBlobIndex].serverId = item.Name;
+                inFlightFiles[item.ClientFileIndex].chunks[item.ClientBlobIndex].uploaded = true;
+                if (areAllBlocksUploaded(item.ClientFileIndex)) {
+                    sendFileCompleteMessage(item.ClientFileIndex);
                 }
             });
         }
@@ -120,7 +120,7 @@ function sendFileCompleteMessage(fileIndex) {
         type: "POST",
         url: "/api/fileassembly",
         dataType: 'json',
-        data: { filename: filename, blocks: blocks },
+        data: { Filename: filename, Blocks: blocks },
         success: function (res) {
            
         }

@@ -1,11 +1,11 @@
 ﻿using Galleria.RavenDb.Controllers;
+using Galleria.Services.FileStorage;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,7 +15,7 @@ namespace Galleria.Controllers
 {
     public class UploadingController : RavenBaseApiController
     {
-        public Task<IEnumerable<FileDesc>> Post()
+        public Task<IEnumerable<ISavedBlock>> Post()
         {
             string folderName = "uploads/blocks";
             string PATH = HttpContext.Current.Server.MapPath("~/"+folderName);
@@ -24,7 +24,7 @@ namespace Galleria.Controllers
             if (Request.Content.IsMimeMultipartContent())
             {
                 var streamProvider = new MultipartFormDataStreamProvider(PATH);
-                var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IEnumerable<FileDesc>>(t =>
+                var task = Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith<IEnumerable<ISavedBlock>>(t =>
                 {
 
                     if (t.IsFaulted || t.IsCanceled)
@@ -40,7 +40,7 @@ namespace Galleria.Controllers
                         string clientBlocknumString = Regex.Replace(clientoptions[1], "[^\\d]", "");
 
                         var info = new FileInfo(i.LocalFileName);
-                        return new FileDesc(int.Parse(clientFilenumString), int.Parse(clientBlocknumString), info.Name, rootUrl + "/" + folderName + "/" + info.Name, info.Length / 1024);
+                        return new SavedBlock(int.Parse(clientFilenumString), int.Parse(clientBlocknumString), info.Name, rootUrl + "/" + folderName + "/" + info.Name, info.Length / 1024);
                     });
                     return fileInfo;
                 });
@@ -61,31 +61,6 @@ namespace Galleria.Controllers
         }
     }
 
-    [DataContract]
-    public class FileDesc
-    {
-        [DataMember]
-        public int clientfileindex { get; set; }
-
-        [DataMember]
-        public int clientblobindex { get; set; }
-        [DataMember]
-        public string name { get; set; }
-
-        [DataMember]
-        public string path { get; set; }
-
-        [DataMember]
-        public long size { get; set; }
-
-        public FileDesc(int fi, int bi, string n, string p, long s)
-        {
-            this.clientfileindex = fi;
-            this.clientblobindex = bi;
-            this.name = n;
-            this.path = p;
-            this.size = s;
-        }
-    }
+    
 
 }
