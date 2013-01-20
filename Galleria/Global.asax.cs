@@ -24,6 +24,7 @@ namespace Galleria
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            UnityConfig.Initialise();
             MappingConfig.SetupMappings();
             RavenDocumentStore.Initialize();
         }
