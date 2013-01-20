@@ -6,13 +6,9 @@ using Galleria.RavenDb.Controllers;
 using Galleria.Services.FileStorage;
 using Galleria.ViewModels;
 using Microsoft.AspNet.SignalR;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Http;
 
 namespace Galleria.Controllers
 {
@@ -33,7 +29,7 @@ namespace Galleria.Controllers
         // GET api/fileassembly
         public async Task<ISavedFile> Post(FileAssemblyRequest item)
         {
-            ISavedFile saveFileInformation = await ChunkedFileStorageService.AssembleFileFromBlocksAsync(item);
+            ISavedFile savedFileInformation = await ChunkedFileStorageService.AssembleFileFromBlocksAsync(item);
 
             string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);
             string mappedThumbnailPath = HttpContext.Current.Server.MapPath(thumbnailPath);
@@ -44,7 +40,7 @@ namespace Galleria.Controllers
             extractor.ImagePathBase = mappedFilePath;
             extractor.ThumbnailPathBase = mappedThumbnailPath;
             extractor.ThumbnailMaxHeight = 200;
-            ExtractedImageInformation exInfo = extractor.GetImageInformation(saveFileInformation.StorageFilename);
+            ExtractedImageInformation exInfo = extractor.GetImageInformation(savedFileInformation);
 
             //write to raven
             StoredImage info = Mapper.Map<StoredImage>(exInfo);
@@ -54,7 +50,7 @@ namespace Galleria.Controllers
             var context = GlobalHost.ConnectionManager.GetHubContext<PictureProcessHub>();
             context.Clients.All.pictureprocessed(Mapper.Map<ProcessedImageViewModel>(info));
 
-            return saveFileInformation;
+            return savedFileInformation;
         }
     }
 

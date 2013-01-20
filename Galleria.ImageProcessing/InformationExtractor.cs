@@ -1,4 +1,5 @@
-﻿
+﻿using Galleria.Services.FileStorage;
+
 namespace Galleria.ImageProcessing
 {
     public class InformationExtractor
@@ -7,16 +8,21 @@ namespace Galleria.ImageProcessing
         public string ThumbnailPathBase { get; set; }
         public int ThumbnailMaxHeight { get; set; }
 
-        public ExtractedImageInformation GetImageInformation(string filename)
+        public ExtractedImageInformation GetImageInformation(ISavedFile savedFileInformation)
         {
             ExtractedImageInformation info = new ExtractedImageInformation();
-            info.FileName = filename;
-            info = new TaglibExtractor().ExtractTags(ImagePathBase + filename, info);
+            info.FileName = savedFileInformation.StorageFilename;
+            info = new TaglibExtractor().ExtractTags(ImagePathBase + info.FileName, info);
+            if (string.IsNullOrWhiteSpace(info.Name))
+            {
+                info.Name = savedFileInformation.OriginalFileName;
+            }
+
             //probably want to do initial rotation here
 
             ThumbnailGenerator thumbGen = new ThumbnailGenerator();
-            thumbGen.GenerateThumbnail(ImagePathBase + filename, ThumbnailPathBase + filename, ThumbnailMaxHeight);
-            info.ThumbnailPath = ThumbnailPathBase + filename;
+            thumbGen.GenerateThumbnail(ImagePathBase + info.FileName, ThumbnailPathBase + info.FileName, ThumbnailMaxHeight);
+            info.ThumbnailPath = ThumbnailPathBase + info.FileName;
             return info;
         }
     }
