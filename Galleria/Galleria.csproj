@@ -299,8 +299,6 @@
     <Content Include="Scripts\supersized.3.2.7.min.js" />
     <Content Include="Scripts\Upload.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Unity.Mvc3.README.txt" />
-    <Content Include="Unity.WebAPI.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

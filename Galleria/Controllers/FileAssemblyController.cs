@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
@@ -17,58 +18,33 @@ namespace Galleria.Controllers
 {
     public class FileAssemblyController : RavenBaseApiController
     {
-        private string blockpath;
+        IChunkedFileStorageService ChunkedFileStorageService;
+
         private string mediapath;
         private string thumbnailPath;
 
-        public FileAssemblyController()
+        public FileAssemblyController(IChunkedFileStorageService chunkedFileStorageService)
         {
-            blockpath = ConfigurationManager.AppSettings["BlockPath"];
+            ChunkedFileStorageService = chunkedFileStorageService;
             mediapath = ConfigurationManager.AppSettings["MediaPath"];
             thumbnailPath = ConfigurationManager.AppSettings["ThumbnailPath"];
         }
 
         // GET api/fileassembly
-        public void Post(FileAssemblyRequest item)
+        public async Task<ISavedFile> Post(FileAssemblyRequest item)
         {
-            string mappedBlockPath = HttpContext.Current.Server.MapPath(blockpath);
+            ISavedFile saveFileInformation = await ChunkedFileStorageService.AssembleFileFromBlocksAsync(item);
+
             string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);
             string mappedThumbnailPath = HttpContext.Current.Server.MapPath(thumbnailPath);
-            string destinationFile = mappedFilePath + item.Filename;
-
-            List<string> sourcefiles = new List<string>();
-
-            //build up the blockstrings
-            foreach(string block in item.Blocks)
-            {
-                sourcefiles.Add(mappedBlockPath + block);
-            }
-
-            using (Stream destStream = File.OpenWrite(destinationFile))
-            {
-                foreach (string srcFileName in sourcefiles)
-                {
-                    using (Stream srcStream = File.OpenRead(srcFileName))
-                    {
-                        srcStream.CopyTo(destStream);
-                    }
-                }
-            }
-
-            //tidy up the old blocks
-            foreach (string srcFileName in sourcefiles)
-            {
-                File.Delete(srcFileName);
-            }
-
-            //following should just be added to a processing queue
 
             //process the image
+            //TODO: Thumbnail writing should be handled via the file service
             InformationExtractor extractor = new InformationExtractor();
             extractor.ImagePathBase = mappedFilePath;
             extractor.ThumbnailPathBase = mappedThumbnailPath;
             extractor.ThumbnailMaxHeight = 200;
-            ExtractedImageInformation exInfo = extractor.GetImageInformation(item.Filename);
+            ExtractedImageInformation exInfo = extractor.GetImageInformation(saveFileInformation.StorageFilename);
 
             //write to raven
             StoredImage info = Mapper.Map<StoredImage>(exInfo);
@@ -77,6 +53,8 @@ namespace Galleria.Controllers
             //signal the hub that we are done
             var context = GlobalHost.ConnectionManager.GetHubContext<PictureProcessHub>();
             context.Clients.All.pictureprocessed(Mapper.Map<ProcessedImageViewModel>(info));
+
+            return saveFileInformation;
         }
     }
 
