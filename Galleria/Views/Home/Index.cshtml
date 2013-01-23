@@ -8,9 +8,10 @@
 
 <div class="row">
     <ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }">
+
     </ul>
     <script type="text/html" id="picture-template">
-        <li><img class="lazyImage" src="@Url.Content("~/Content/Images/ImagePlaceholder.png")" data-bind="attr: { 'data-original': ThumbnailUrl }" /></li>
+        <li><img class="lazyImage" data-bind="attr: { src: LazyLoadUrl,'data-original': ThumbnailUrl }" /></li>
     </script>
 </div>
 
@@ -25,6 +26,7 @@
 
             // Declare a function on the chat hub so the server can invoke it          
             pictureprocesshub.client.pictureprocessed = function (image) {
+            	image.LazyLoadUrl = image.ThumbnailUrl;
                 viewModel.processedImages.push(image);
                 $("img.lazyImage").lazyload();
             };
@@ -42,6 +44,8 @@
                 @:image = new Object();
                         @:image.Url = '@upload.Url';
                         @:image.ThumbnailUrl = '@upload.ThumbnailUrl';
+						@:image.LazyLoadUrl = '@Url.Content("~/Content/Images/ImagePlaceholder.png")';
+
                         @:viewModel.processedImages.push(image);    
                                     
             }
