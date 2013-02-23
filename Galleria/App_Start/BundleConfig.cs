@@ -12,7 +12,7 @@ namespace Galleria
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*",
-                        "~/Content/Bootstrap/js/bootstrap.js",
+                        "~/Scripts/Bootstrap/js/bootstrap.js",
                         "~/Scripts/knockout-{version}.js"
                         ));
 
@@ -23,7 +23,7 @@ namespace Galleria
                         "~/Scripts/upload.js"));
 
             bundles.Add(new StyleBundle("~/Content/cssbase").Include(
-                        "~/Content/Bootstrap/css/bootstrap.css",
+                        "~/Content/bootstrap.css",
                         "~/Content/site.css"
                         ));
 

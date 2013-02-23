@@ -44,7 +44,7 @@ namespace Galleria.Controllers
 
             //write to raven
             StoredImage info = Mapper.Map<StoredImage>(exInfo);
-            RavenSession.Store(info);
+            await RavenSession.StoreAsync(info);
 
             //signal the hub that we are done
             var context = GlobalHost.ConnectionManager.GetHubContext<PictureProcessHub>();
