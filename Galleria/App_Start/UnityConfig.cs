@@ -27,18 +27,16 @@ namespace Galleria
 
             container.RegisterType<IFileStorageService, ChunkedLocalFileSystemStorageService>(new ContainerControlledLifetimeManager(), 
                                                                                                 new InjectionConstructor(
-                                                                                                    HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["BlockPath"]), 
-                                                                                                    HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["MediaPath"]), 
                                                                                                     ConfigurationManager.AppSettings["BlockPath"], 
-                                                                                                    ConfigurationManager.AppSettings["MediaPath"]
+                                                                                                    ConfigurationManager.AppSettings["MediaPath"],
+                                                                                                    ConfigurationManager.AppSettings["PreviewPath"]
                                                                                                 ));
 
             container.RegisterType<IChunkedFileStorageService, ChunkedLocalFileSystemStorageService>(new ContainerControlledLifetimeManager(),
                                                                                                         new InjectionConstructor(
-                                                                                                            HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["BlockPath"]),
-                                                                                                            HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["MediaPath"]),
                                                                                                             ConfigurationManager.AppSettings["BlockPath"],
-                                                                                                            ConfigurationManager.AppSettings["MediaPath"]
+                                                                                                            ConfigurationManager.AppSettings["MediaPath"],
+                                                                                                            ConfigurationManager.AppSettings["PreviewPath"]
                                                                                                         ));
 
             return container;

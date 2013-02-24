@@ -10,12 +10,13 @@ namespace Galleria.ImageProcessing
 
         public ExtractedImageInformation GetImageInformation(ISavedFile savedFileInformation)
         {
+            //TODO, I Should be a parallel async call
             ExtractedImageInformation info = new ExtractedImageInformation();
-            info.FileName = savedFileInformation.StorageFilename;
+            info.FileName = savedFileInformation.Filename;
             info = new TaglibExtractor().ExtractTags(ImagePathBase + info.FileName, info);
             if (string.IsNullOrWhiteSpace(info.Name))
             {
-                info.Name = savedFileInformation.OriginalFileName;
+                info.Name = savedFileInformation.Name;
             }
 
             //probably want to do initial rotation here

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Galleria.Services.FileStorage;
+using System;
 
 namespace Galleria.Models
 {
-    public class StoredImage
+    public class StoredImage : ISavedFile
     {
         public string Id { get; set; }
         public string Name { get; set; }

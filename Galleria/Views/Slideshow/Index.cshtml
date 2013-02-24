@@ -38,7 +38,7 @@
                 slides: [			// Slideshow Images
                     @foreach(var processedImage in Model)
                     {
-                        @Html.Raw(string.Format("{{image:'{0}', title:'{1}', thumb:'{2}'}},", processedImage.Url, processedImage.Name, processedImage.ThumbnailUrl));
+                        @Html.Raw(string.Format("{{image:'{0}', title:'{1}', thumb:'{2}'}},", processedImage.Url, processedImage.Name, processedImage.PreviewUrl));
 
                     }
                 ]

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 
 namespace Galleria.Services.FileStorage.Implementations
 {
@@ -13,16 +14,21 @@ namespace Galleria.Services.FileStorage.Implementations
     {
         private string BlockStorageUri;
         private string FileStorageUri;
+        private string PreviewStorageUri;
         private string BlockStoragePath;
         private string FileStoragePath;
+        private string PreviewStoragePath;
 
 
-        public ChunkedLocalFileSystemStorageService(string blockStoragePath, string fileStoragePath, string blockStorageUri, string fileStorageUri)
+        public ChunkedLocalFileSystemStorageService(string blockStorageUri, string fileStorageUri, string previewStorageUri)
         {
-            BlockStoragePath = blockStoragePath;
-            FileStoragePath = fileStoragePath;
+            //TODO Hosting environment difficult to mock, replace with custom wrapper
+            BlockStoragePath = HostingEnvironment.MapPath(blockStorageUri);
+            FileStoragePath = HostingEnvironment.MapPath(fileStorageUri);
+            PreviewStoragePath = HostingEnvironment.MapPath(previewStorageUri);
             BlockStorageUri = VirtualPathUtility.ToAbsolute(blockStorageUri);
             FileStorageUri = VirtualPathUtility.ToAbsolute(fileStorageUri);
+            PreviewStorageUri = VirtualPathUtility.ToAbsolute(previewStorageUri);
         }
 
         public async Task<IEnumerable<ISavedBlock>> SaveAsBlocksAsync(HttpRequestMessage httpRequest)
@@ -78,7 +84,7 @@ namespace Galleria.Services.FileStorage.Implementations
                 File.Delete(srcFileName);
             }
 
-            return new SavedFile() { OriginalFileName = assemblyRequest.Filename, StorageFilename = storageFileName, StorageUri = FileStorageUri + storageFileName };
+            return new SavedFile() { Name = assemblyRequest.Filename, Filename = storageFileName };
         }
 
         public async Task<IEnumerable<ISavedFile>> SaveFilesWithoutChunkingAsync(HttpRequestMessage httpRequest)
@@ -96,12 +102,26 @@ namespace Galleria.Services.FileStorage.Implementations
                 var info = new FileInfo(i.LocalFileName);
                 string storageFileName = string.Format("{0}-{1}", Guid.NewGuid(), info.Name);
 
-                //figure out async move
+                //TODO figure out async move
                 File.Move(FileStoragePath + info.Name, FileStoragePath + storageFileName);
-                return new SavedFile() { OriginalFileName = info.Name, StorageFilename = storageFileName, StorageUri = FileStorageUri + storageFileName };
+                return new SavedFile() { Name = info.Name, Filename = storageFileName };
             });
 
             return fileInfo;
+        }
+
+
+        public string GetFileStorageUri(ISavedFile file, FileType fileType)
+        {
+            switch (fileType)
+            {
+                case FileType.File:
+                    return FileStorageUri + file.Filename;
+                case FileType.Preview:
+                    return PreviewStorageUri + file.Filename;
+            }
+
+            return null;
         }
     }
 }

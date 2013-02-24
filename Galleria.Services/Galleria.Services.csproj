@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileStorage\FileAssemblyRequest.cs" />
+    <Compile Include="FileStorage\FileStorageEnums.cs" />
     <Compile Include="FileStorage\IFileAssemblyRequest.cs" />
     <Compile Include="FileStorage\Implementations\ChunkedLocalFileSystemStorageService.cs" />
     <Compile Include="FileStorage\SavedFile.cs" />

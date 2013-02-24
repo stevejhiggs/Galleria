@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -12,5 +13,19 @@ namespace Galleria.Services.FileStorage
         /// <param name="httpContent"></param>
         /// <returns></returns>
         Task<IEnumerable<ISavedFile>> SaveFilesWithoutChunkingAsync(HttpRequestMessage httpRequest);
+
+        /// <summary>
+        /// Get a files uri from the storage system
+        /// </summary>
+        /// <param name="storageFileName"></param>
+        /// <returns></returns>
+        string GetFileStorageUri(ISavedFile file, FileType fileType);
+
+        /// <summary>
+        /// Get back a file for further processing
+        /// </summary>
+        /// <param name="id">The image id</param>
+        /// <returns></returns>
+        //Task<Stream> RetrieveFileContents(string id);
     }
 }

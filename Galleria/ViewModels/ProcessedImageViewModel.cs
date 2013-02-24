@@ -7,7 +7,7 @@ namespace Galleria.ViewModels
 {
     public class ProcessedImageViewModel
     {
-        public string ThumbnailUrl { get; set; }
+        public string PreviewUrl { get; set; }
         public string Url { get; set; }
         public string Name { get; set; }
     }

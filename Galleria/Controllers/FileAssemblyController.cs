@@ -23,7 +23,7 @@ namespace Galleria.Controllers
         {
             ChunkedFileStorageService = chunkedFileStorageService;
             mediapath = ConfigurationManager.AppSettings["MediaPath"];
-            thumbnailPath = ConfigurationManager.AppSettings["ThumbnailPath"];
+            thumbnailPath = ConfigurationManager.AppSettings["PreviewPath"];
         }
 
         // GET api/fileassembly

@@ -1,7 +1,7 @@
 ﻿
 namespace Galleria.Services.FileStorage
 {
-    public class SavedBlock : ISavedBlock
+    internal class SavedBlock : ISavedBlock
     {
         public int ClientFileIndex { get; set; }
         public int ClientBlobIndex { get; set; }
