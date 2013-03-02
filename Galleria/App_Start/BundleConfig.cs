@@ -23,7 +23,7 @@ namespace Galleria
                         "~/Scripts/upload.js"));
 
             bundles.Add(new StyleBundle("~/Content/cssbase").Include(
-                        "~/Content/bootstrap.css",
+                        "~/Content/BootstrapCss/bootstrap.css",
                         "~/Content/site.css"
                         ));
 
