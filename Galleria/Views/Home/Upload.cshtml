@@ -2,9 +2,14 @@
     ViewBag.Title = "Upload";
 }
 
-<h2>Upload your images</h2>
+@section topnav {
+    <ul class="btn-nav pull-right">
+        <li><a href="@Url.Action("Index", "Home")" class="btn btn-success"><i class="glyphicon glyphicon-chevron-left"></i>Back to gallery</a></li>
+    </ul>
+}
+
 <div id="uploadBox">
-    <span>Drop files here</span>
+    <span>Drop files here to upload them</span>
 </div>
 
 <ul data-bind="template: { name: 'upload-template', foreach: uploads }">
