@@ -14,8 +14,18 @@ namespace Galleria.Controllers
 
         public ActionResult Edit(string id)
         {
-            var storedImage = RavenSession.Query<StoredImage>().Where(a => a.Id == id);
-            return View("Partials/EditForm", storedImage);
+            var storedImage = RavenSession.Load<StoredImage>(id);
+            return View("Partials/EditForm", Mapper.Map<EditImageDetailsViewModel>(storedImage));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditImageDetailsViewModel image)
+        {
+            var storedImage = RavenSession.Load<StoredImage>(image.Id);
+            storedImage.Name = image.Name;
+            RavenSession.Store(storedImage);
+
+            return View("Partials/EditForm", image);
         }
 
     }

@@ -12,7 +12,7 @@ namespace Galleria
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*",
-                        "~/Scripts/Bootstrap/js/bootstrap.js",
+                        "~/Scripts/bootstrap.js",
                         "~/Scripts/knockout-{version}.js"
                         ));
 

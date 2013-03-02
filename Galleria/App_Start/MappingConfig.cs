@@ -20,6 +20,8 @@ namespace Galleria
 
             Mapper.CreateMap<ExtractedImageInformation, StoredImage>()
                     .ForMember(m => m.Id, v => v.MapFrom(s => Guid.NewGuid().ToString()));
+
+            Mapper.CreateMap<StoredImage, EditImageDetailsViewModel>();
         }
     }
 }

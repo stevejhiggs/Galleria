@@ -13,16 +13,21 @@
 
 <div class="row">
     <ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }">
-
     </ul>
     <script type="text/html" id="picture-template">
         <li>
             <div class="imageSurround">
                 <img class="lazyImage" data-bind="attr: { src: LazyLoadUrl, 'data-original': PreviewUrl }" />
-                <div class="name"><span data-bind="text:Name">&nbsp;</span><a href="#"><i class="glyphicon glyphicon-pencil"></i></a></div>
+                <div class="name"><span data-bind="text: Name">&nbsp;</span><a data-bind="    attr: { 'data-modalform': '/ImageDetails/Edit?Id=' + Id }" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
             </div>
         </li>
     </script>
+</div>
+<div id="model-form" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editFormLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="modal-content-container" class="modal-content">
+        </div>
+    </div>
 </div>
 
 @section scripts
@@ -36,26 +41,27 @@
 
             // Declare a function on the chat hub so the server can invoke it          
             pictureprocesshub.client.pictureprocessed = function (image) {
-            	image.LazyLoadUrl = image.PreviewUrl;
+                image.LazyLoadUrl = image.PreviewUrl;
                 viewModel.processedImages.push(image);
                 $("img.lazyImage").lazyload();
             };
 
             // Start the connection
             $.connection.hub.start();
-        
+
 
             var viewModel = { processedImages: ko.observableArray([]) }
             ko.applyBindings(viewModel);
 
             var image = new Object();
-            @foreach(var upload in Model)
+            @foreach (var upload in Model)
             {
                 @:image = new Object();
-                        @:image.Url = '@upload.Url';
-                        @:image.PreviewUrl = '@upload.PreviewUrl';
-						@:image.LazyLoadUrl = '@Url.Content("~/Content/Images/ImagePlaceholder.png")';
-                        @:image.Name = '@upload.Name';
+                                    @:image.Id = '@upload.Id';
+                                    @:image.Url = '@upload.Url';
+                                    @:image.PreviewUrl = '@upload.PreviewUrl';
+            						@:image.LazyLoadUrl = '@Url.Content("~/Content/Images/ImagePlaceholder.png")';
+                                    @:image.Name = '@upload.Name';
 
                         @:viewModel.processedImages.push(image);    
                                     
@@ -63,6 +69,19 @@
 
             $("img.lazyImage").lazyload({
                 effect: "fadeIn"
+            });
+
+
+            $("a[data-modalform]").click(function () {
+                var href = $(this).attr("data-modalform");
+                //load destination via ajax
+                $.get(href, function (data) {
+                    //inject into modal container
+                    $("#modal-content-container").html(data);
+                    $('#model-form').modal();
+                })
+
+                return false;
             });
         });
     </script>
