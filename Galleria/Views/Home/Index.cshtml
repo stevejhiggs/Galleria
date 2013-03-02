@@ -11,7 +11,12 @@
 
     </ul>
     <script type="text/html" id="picture-template">
-        <li><div class="imageSurround"><img class="lazyImage" data-bind="attr: { src: LazyLoadUrl, 'data-original': PreviewUrl }" /><div class="name" data-bind="text:Name">&nbsp;</div></div></li>
+        <li>
+            <div class="imageSurround">
+                <img class="lazyImage" data-bind="attr: { src: LazyLoadUrl, 'data-original': PreviewUrl }" />
+                <div class="name"><span data-bind="text:Name">&nbsp;</span><a href="#"><i class="glyphicon glyphicon-pencil"></i></a></div>
+            </div>
+        </li>
     </script>
 </div>
 

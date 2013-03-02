@@ -43,6 +43,16 @@ ul.imageList li {
   padding: 0.3em;
   color: #666;
 }
+.imageSurround .name a {
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 2em;
+  color: #AAA;
+}
+.imageSurround .name a:hover {
+  text-decoration: none;
+}
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {
