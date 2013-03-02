@@ -1,0 +1,7 @@
+﻿@model Galleria.Models.StoredImage
+
+@using (Ajax.BeginForm(new AjaxOptions { }))
+{
+    @Html.EditorFor(a => a.Name)
+    <input type="submit" value="OK" />
+}

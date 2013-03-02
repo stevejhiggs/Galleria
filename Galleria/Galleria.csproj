@@ -172,6 +172,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FileAssemblyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageDetailsController.cs" />
     <Compile Include="Controllers\SlideshowController.cs" />
     <Compile Include="Controllers\UploadingController.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,6 +192,9 @@
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
     <Content Include="Content\Images\ImagePlaceholder.png" />
+    <Content Include="Content\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
     <Content Include="Content\Supersized\css\supersized.css" />
     <Content Include="Content\Supersized\img\back.png" />
     <Content Include="Content\Supersized\img\bg-black.png" />
@@ -209,6 +213,7 @@
     <Content Include="Content\Supersized\img\thumb-back.png" />
     <Content Include="Content\Supersized\img\thumb-forward.png" />
     <Content Include="Content\Supersized\theme\supersized.shutter.css" />
+    <Content Include="Content\Site.less" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -293,7 +298,6 @@
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\supersized.shutter.js" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.easing.1.3.js" />
     <Content Include="Scripts\jquery.lazyload.min.js.map">
       <DependentUpon>jquery.lazyload.js</DependentUpon>
@@ -318,6 +322,7 @@
     <Content Include="Views\Home\Upload.cshtml" />
     <Content Include="Views\Slideshow\Index.cshtml" />
     <Content Include="Views\Shared\_Fullscreen.cshtml" />
+    <Content Include="Views\ImageDetails\Partials\EditForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
