@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Galleria.Core.RavenDb.Session;
+using Raven.Client;
 
-namespace Galleria.App_Start
+namespace Galleria
 {
-    public class RavenConfig
-    {
+    public static class RavenConfig
+    { 
+        public static void SetupRaven()
+        {
+            RavenDocumentStore.Initialize();
+        }
     }
 }

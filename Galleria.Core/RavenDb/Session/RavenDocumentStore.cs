@@ -27,7 +27,16 @@ namespace Galleria.Core.RavenDb.Session
             instance.Conventions.IdentityPartsSeparator = "-";
             instance.Initialize();
 
-            IndexCreation.CreateIndexes(Assembly.GetCallingAssembly(), instance);
+            Assembly callAssembly = Assembly.GetCallingAssembly();
+            Assembly executingAssembly = Assembly.GetExecutingAssembly();
+
+            IndexCreation.CreateIndexes(callAssembly, instance);
+
+            if (executingAssembly != callAssembly)
+            {
+                IndexCreation.CreateIndexes(executingAssembly, instance);
+            }
+            
 
             if (assemblies != null)
             {
