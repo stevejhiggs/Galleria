@@ -1,5 +1,5 @@
 ﻿
-namespace Galleria.Services.FileStorage
+namespace Galleria.Core.Services.FileStorage
 {
     internal class SavedFile : ISavedFile
     {

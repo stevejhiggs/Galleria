@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Galleria.Services.FileStorage
+namespace Galleria.Core.Services.FileStorage
 {
     public interface IFileStorageService
     {

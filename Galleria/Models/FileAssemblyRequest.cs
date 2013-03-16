@@ -1,5 +1,5 @@
 ﻿
-using Galleria.Services.FileStorage;
+using Galleria.Core.Services.FileStorage;
 namespace Galleria.Models
 {
     public class FileAssemblyRequest : IFileAssemblyRequest

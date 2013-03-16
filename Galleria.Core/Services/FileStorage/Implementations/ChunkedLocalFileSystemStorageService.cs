@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 
-namespace Galleria.Services.FileStorage.Implementations
+namespace Galleria.Core.Services.FileStorage.Implementations
 {
     public class ChunkedLocalFileSystemStorageService : IChunkedFileStorageService
     {

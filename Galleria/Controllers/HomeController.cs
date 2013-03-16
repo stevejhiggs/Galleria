@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Galleria.Models;
-using Galleria.RavenDb.Controllers;
+using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
 using System;
 using System.Collections.Generic;

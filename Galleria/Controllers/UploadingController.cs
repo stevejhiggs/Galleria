@@ -1,5 +1,6 @@
-﻿using Galleria.RavenDb.Controllers;
-using Galleria.Services.FileStorage;
+﻿
+using Galleria.Core.Services.FileStorage;
+using Galleria.RavenDb.BaseControllers;
 using System;
 using System.Collections.Generic;
 using System.Net;
