@@ -1,7 +1,7 @@
 ﻿using Galleria.Core.Services.FileStorage;
 using System;
 
-namespace Galleria.Models
+namespace Galleria.Core.Models
 {
     public class StoredImage : ISavedFile
     {

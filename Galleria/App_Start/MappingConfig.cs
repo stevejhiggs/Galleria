@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Galleria.Core.ImageProcessing;
-using Galleria.Models;
+using Galleria.Core.Models;
 using Galleria.Core.Services.FileStorage;
 using Galleria.ViewModels;
 using Microsoft.Practices.ServiceLocation;
 using System;
-using System.Configuration;
-using System.Web;
 
 namespace Galleria
 {

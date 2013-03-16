@@ -73,6 +73,8 @@
     <Compile Include="ImageProcessing\InformationExtractor.cs" />
     <Compile Include="ImageProcessing\TaglibExtractor.cs" />
     <Compile Include="ImageProcessing\ThumbnailGenerator.cs" />
+    <Compile Include="Models\FileAssemblyRequest.cs" />
+    <Compile Include="Models\StoredImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RavenDb\Session\IRavenDocumentSessionFactory.cs" />
     <Compile Include="RavenDb\Session\RavenDocumentStore.cs" />

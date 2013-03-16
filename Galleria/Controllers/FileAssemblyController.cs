@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Galleria.Core.ImageProcessing;
+using Galleria.Core.Models;
 using Galleria.Core.Services.FileStorage;
 using Galleria.Hubs;
-using Galleria.Models;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
 using Microsoft.AspNet.SignalR;

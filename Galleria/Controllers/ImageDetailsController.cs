@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Galleria.Models;
+using Galleria.Core.Models;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace Galleria.Controllers
