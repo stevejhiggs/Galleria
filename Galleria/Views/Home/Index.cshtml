@@ -7,7 +7,6 @@
 @section topnav {
     <ul class="btn-nav pull-right">
         <li><a href="@Url.Action("Upload", "Home")" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign"></i>Add Pictures</a></li>
-        <li><a href="@Url.Action("Index", "Slideshow")" class="btn"><i class="glyphicon glyphicon-zoom-in"></i>Slideshow</a></li>
     </ul>
 }
 
@@ -17,7 +16,9 @@
     <script type="text/html" id="picture-template">
         <li>
             <div class="imageSurround">
-                <img class="lazyImage" data-bind="attr: { src: LazyLoadUrl, 'data-original': PreviewUrl }" />
+                <a data-bind="attr: { 'href': '@(Url.Action("Index", "Slideshow"))?startImageId=' + Id }">
+                    <img class="lazyImage" data-bind="attr: { src: LazyLoadUrl, 'data-original': PreviewUrl }" />
+                </a>
                 <div class="name"><span data-bind="text: Name">&nbsp;</span><a data-bind="    attr: { 'data-modalform': '/ImageDetails/Edit?Id=' + Id }" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
             </div>
         </li>

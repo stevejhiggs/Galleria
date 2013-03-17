@@ -13,16 +13,29 @@ namespace Galleria.Controllers
         //
         // GET: /Slideshow/
 
-        public ActionResult Index()
+        public ActionResult Index(string startImageId)
         {
             var uploadInfo = RavenSession.Query<StoredImage>().Take(500).ToArray();
             IList<ProcessedImageViewModel> existingMedia = new List<ProcessedImageViewModel>();
+            int activeSlideNumber = 1;
+            int imageCounter = 0;
             foreach (var upload in uploadInfo)
             {
                 existingMedia.Add(Mapper.Map<ProcessedImageViewModel>(upload));
+
+                if (startImageId == upload.Id)
+                {
+                    activeSlideNumber = imageCounter + 1;
+                }
+
+                imageCounter++;
             }
 
-            return View(existingMedia);
+            var viewModel = new SlideShowViewModel();
+            viewModel.Images = existingMedia;
+            viewModel.StartNumber = activeSlideNumber;
+
+            return View(viewModel);
         }
     }
 }

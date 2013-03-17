@@ -1,4 +1,4 @@
-﻿@model IList<Galleria.ViewModels.ProcessedImageViewModel>
+﻿@model Galleria.ViewModels.SlideShowViewModel
 
 @{
     ViewBag.Title = "Slideshow";
@@ -29,14 +29,16 @@
             $.supersized({
 
                 // Functionality
+                autoplay: 0,
                 slide_interval: 10000,		// Length between transitions
                 transition: 1, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
                 transition_speed: 700,		// Speed of transition
-                fit_always:1,
+                fit_always: 1,
+                start_slide: @Model.StartNumber,
                 // Components							
                 slide_links: false,	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
                 slides: [			// Slideshow Images
-                    @foreach(var processedImage in Model)
+                    @foreach (var processedImage in Model.Images)
                     {
                         @Html.Raw(string.Format("{{image:'{0}', title:'{1}', thumb:'{2}'}},", processedImage.Url, processedImage.Name, processedImage.PreviewUrl));
 
