@@ -174,7 +174,6 @@
     <Compile Include="Controllers\FileAssemblyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageDetailsController.cs" />
-    <Compile Include="Controllers\MapDisplayController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseApiController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseController.cs" />
     <Compile Include="Controllers\SlideshowController.cs" />
@@ -186,6 +185,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RavenDb\Session\RavenWebDocumentSessionFactory.cs" />
     <Compile Include="ViewModels\EditImageDetailsViewModel.cs" />
+    <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\ProcessedImageViewModel.cs" />
     <Compile Include="ViewModels\SlideShowViewModel.cs" />
   </ItemGroup>
@@ -328,6 +328,7 @@
     <Content Include="Views\Slideshow\Index.cshtml" />
     <Content Include="Views\Shared\_Fullscreen.cshtml" />
     <Content Include="Views\ImageDetails\Partials\EditForm.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

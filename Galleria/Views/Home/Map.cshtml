@@ -1,0 +1,88 @@
+﻿@model Galleria.ViewModels.MapViewModel
+
+@{
+    ViewBag.Title = "Map";
+}
+
+@section topnav {
+    <ul class="btn-nav pull-right">
+        <li>
+            <div class="btn-group" data-toggle="buttons-radio">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-success">list</a>
+                <a href="@Url.Action("Map", "Home")" class="btn btn-success active">map</a>
+            </div>
+        </li>
+        <li><a href="@Url.Action("Upload", "Home")" class="btn btn-primary">add pictures</a></li>
+    </ul>
+}
+
+<div id="map-canvas">
+
+</div>
+
+@section css {
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+      }
+
+        .container {
+            height:90%;
+        }
+    </style>
+}
+
+@section scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+        var imagesLocations = [
+            @foreach (var i in Model.Images)
+            {
+                @Html.Raw(string.Format("['{0}', {1}, {2}, '<img src=\"{3}\" alt=\"{0}\"/>' ],", i.Name, i.Latitude, i.Longitude, i.PreviewUrl ))
+            }
+        ];
+
+        var map;
+        var infowindow = null;
+
+        $(function () {
+            var mapOptions = {
+                zoom: @(Model.ZoomLevel),
+                center: new google.maps.LatLng(@(Model.CentreLatitude), @(Model.CentreLongitude)),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+
+            setMarkers(map, imagesLocations);
+
+            infowindow = new google.maps.InfoWindow({
+                content: "loading..."
+            });
+        });
+
+        function setMarkers(map, locations) {
+            // Add markers to the map
+
+            // Marker sizes are expressed as a Size of X,Y
+            // where the origin of the image (0,0) is located
+            // in the top left of the image.
+            for (var i = 0; i < locations.length; i++) {
+                var image = locations[i];
+                var myLatLng = new google.maps.LatLng(image[1], image[2]);
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: image[0],
+                    html: image[3]
+                });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(this.html);
+                    infowindow.open(map,this);
+                });
+
+            }
+        }
+    </script>
+}

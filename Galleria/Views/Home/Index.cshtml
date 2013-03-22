@@ -1,12 +1,18 @@
 ﻿@model IList<Galleria.ViewModels.ProcessedImageViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List";
 }
 
 @section topnav {
     <ul class="btn-nav pull-right">
-        <li><a href="@Url.Action("Upload", "Home")" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign"></i>Add Pictures</a></li>
+        <li>
+            <div class="btn-group" data-toggle="buttons-radio">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-success active">list</a>
+                <a href="@Url.Action("Map", "Home")" class="btn btn-success">map</a>
+            </div>
+        </li>
+        <li><a href="@Url.Action("Upload", "Home")" class="btn btn-primary">add pictures</a></li>
     </ul>
 }
 
