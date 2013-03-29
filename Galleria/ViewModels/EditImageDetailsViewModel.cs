@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Galleria.ViewModels
 {
@@ -6,5 +7,7 @@ namespace Galleria.ViewModels
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string HiddenTags { get; set; }
+        public string ExistingTagsJson { get; set; }
     }
 }

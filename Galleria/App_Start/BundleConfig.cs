@@ -13,7 +13,8 @@ namespace Galleria
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/bootstrap.js",
-                        "~/Scripts/knockout-{version}.js"
+                        "~/Scripts/knockout-{version}.js",
+                        "~/Scripts/bootstrap-tagmanager.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -24,7 +25,8 @@ namespace Galleria
 
             bundles.Add(new StyleBundle("~/Content/cssbase").Include(
                         "~/Content/BootstrapCss/bootstrap.css",
-                        "~/Content/site.css"
+                        "~/Content/site.css",
+                        "~/Content/bootstrap-tagmanager.css"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/homepage").Include(

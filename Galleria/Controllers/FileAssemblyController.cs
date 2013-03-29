@@ -6,6 +6,7 @@ using Galleria.Hubs;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
 using Microsoft.AspNet.SignalR;
+using System;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web;
@@ -44,6 +45,7 @@ namespace Galleria.Controllers
 
             //write to raven
             StoredImage info = Mapper.Map<StoredImage>(exInfo);
+            info.UploadDateTime = DateTime.Now;
             await RavenSession.StoreAsync(info);
 
             //signal the hub that we are done

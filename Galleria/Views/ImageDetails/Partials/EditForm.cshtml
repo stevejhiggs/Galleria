@@ -11,9 +11,20 @@
     @Html.HiddenFor(a => a.Id);
     <div class="modal-body">
         @Html.EditorFor(a => a.Name)
+        @Html.HiddenFor(a => a.HiddenTags)
+        <input type="text" name="tags" placeholder="Tags" class="tagManager" value=""/>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
         <input type="submit" class="btn btn-primary" value="Save changes" />
     </div>
 }
+
+<script type="text/javascript">
+    $(".tagManager").tagsManager({
+        @if (!string.IsNullOrWhiteSpace(Model.ExistingTagsJson)) {
+            @:prefilled: @Html.Raw(Model.ExistingTagsJson),
+        }
+        hiddenTagListName: 'HiddenTags'
+    });
+</script>

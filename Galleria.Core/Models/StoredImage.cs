@@ -1,5 +1,6 @@
 ﻿using Galleria.Core.Services.FileStorage;
 using System;
+using System.Collections.Generic;
 
 namespace Galleria.Core.Models
 {
@@ -12,5 +13,7 @@ namespace Galleria.Core.Models
         public double? Longitude { get; set; }
         public int Orientation { get; set; }
         public DateTime? Timestamp { get; set; }
+        public List<string> Tags { get; set; }
+        public DateTime UploadDateTime { get; set; }
     }
 }

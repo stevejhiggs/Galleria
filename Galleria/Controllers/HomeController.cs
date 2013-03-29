@@ -15,7 +15,7 @@ namespace Galleria.Controllers
 
         public ActionResult Index()
         {
-            var uploadInfo = RavenSession.Query<StoredImage>().Take(1000).ToArray();
+            var uploadInfo = RavenSession.Query<StoredImage>().OrderByDescending(i => i.UploadDateTime).Take(1000).ToArray();
             IList<ProcessedImageViewModel> existingMedia = new List<ProcessedImageViewModel>();
             foreach (var upload in uploadInfo)
             {
@@ -27,7 +27,7 @@ namespace Galleria.Controllers
 
         public ActionResult Map()
         {
-            var uploadInfo = RavenSession.Query<StoredImage>().Take(1000).ToArray();
+            var uploadInfo = RavenSession.Query<StoredImage>().OrderByDescending(i => i.UploadDateTime).Take(1000).ToArray();
             IList<ProcessedImageViewModel> existingMedia = new List<ProcessedImageViewModel>();
             foreach (var upload in uploadInfo)
             {

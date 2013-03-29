@@ -2,6 +2,8 @@
 using Galleria.Core.Models;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Galleria.Controllers
@@ -14,7 +16,14 @@ namespace Galleria.Controllers
         public ActionResult Edit(string id)
         {
             var storedImage = RavenSession.Load<StoredImage>(id);
-            return View("Partials/EditForm", Mapper.Map<EditImageDetailsViewModel>(storedImage));
+            var viewModel =  Mapper.Map<EditImageDetailsViewModel>(storedImage);
+            //todo handle this in the mapping
+            if (storedImage.Tags != null && storedImage.Tags.Count > 0)
+            {
+                viewModel.ExistingTagsJson = JsonConvert.SerializeObject(storedImage.Tags.ToArray());
+            }
+            
+            return View("Partials/EditForm", viewModel);
         }
 
         [HttpPost]
@@ -22,6 +31,18 @@ namespace Galleria.Controllers
         {
             var storedImage = RavenSession.Load<StoredImage>(image.Id);
             storedImage.Name = image.Name;
+
+            //break apart the tags
+            if (image.HiddenTags != null)
+            {
+                string[] tags = image.HiddenTags.Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
+                storedImage.Tags = new List<string>(tags);
+            }
+            else
+            {
+                storedImage.Tags = null;
+            }
+
             RavenSession.Store(storedImage);
 
             return View("Partials/EditForm", image);
