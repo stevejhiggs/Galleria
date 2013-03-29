@@ -24,7 +24,7 @@
     function editComplete(data)
     {
         //this mapping should take place in the controller
-        data.LazyLoadUrl = data.PreviewUrl;
+        data.LazyLoadPlaceholderUrl = data.PreviewUrl;
         //find this image in the observable array
         var image = ko.utils.arrayFirst(viewModel.processedImages(), function(currentImage) {
             return currentImage.Id === data.Id;

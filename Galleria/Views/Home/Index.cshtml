@@ -1,4 +1,4 @@
-﻿@model IList<Galleria.ViewModels.ProcessedImageViewModel>
+﻿@model Galleria.ViewModels.IndexViewModel
 
 @{
     ViewBag.Title = "List";
@@ -23,7 +23,7 @@
         <li>
             <div class="imageSurround">
                 <a data-bind="attr: { 'href': '@(Url.Action("Index", "Slideshow"))?startImageId=' + Id }">
-                    <img class="lazyImage" data-bind="attr: { src: LazyLoadUrl, 'data-original': PreviewUrl }" />
+                    <img class="lazyImage" data-bind="attr: { src: LazyLoadPlaceholderUrl, 'data-original': PreviewUrl }" />
                 </a>
                 <div class="name"><span data-bind="text: Name">&nbsp;</span><a data-bind="click: showEditDialog" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
             </div>
@@ -62,19 +62,8 @@
             viewModel = { processedImages: ko.observableArray([]) }
             ko.applyBindings(viewModel);
 
-            var image = new Object();
-            @foreach (var upload in Model)
-            {
-                @:image = new Object();
-                                    @:image.Id = '@upload.Id';
-                                    @:image.Url = '@upload.Url';
-                                    @:image.PreviewUrl = '@upload.PreviewUrl';
-            						@:image.LazyLoadUrl = '@Url.Content("~/Content/Images/ImagePlaceholder.png")';
-                                    @:image.Name = '@upload.Name';
-
-                        @:viewModel.processedImages.push(image);    
-                                    
-            }
+            ko.utils.arrayPushAll(viewModel.processedImages(), @Model.ImageCollectionJson);
+            viewModel.processedImages.valueHasMutated();
 
             $("img.lazyImage").lazyload({
                 effect: "fadeIn"
@@ -83,7 +72,6 @@
 
             $("a[data-modalform]").click(function () {
                 showEditDialog($(this));
-
                 return false;
             });
         });
