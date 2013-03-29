@@ -29,21 +29,26 @@ namespace Galleria.Controllers
         [HttpPost]
         public ActionResult Edit(EditImageDetailsViewModel image)
         {
-            var storedImage = RavenSession.Load<StoredImage>(image.Id);
-            storedImage.Name = image.Name;
-
-            //break apart the tags
-            if (image.HiddenTags != null)
+            if (ModelState.IsValid)
             {
-                string[] tags = image.HiddenTags.Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
-                storedImage.Tags = new List<string>(tags);
-            }
-            else
-            {
-                storedImage.Tags = null;
-            }
+                var storedImage = RavenSession.Load<StoredImage>(image.Id);
+                storedImage.Name = image.Name;
 
-            RavenSession.Store(storedImage);
+                //break apart the tags
+                if (image.HiddenTags != null)
+                {
+                    string[] tags = image.HiddenTags.Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
+                    storedImage.Tags = new List<string>(tags);
+                }
+                else
+                {
+                    storedImage.Tags = null;
+                }
+
+                RavenSession.Store(storedImage);
+
+                return Json(Mapper.Map<ProcessedImageViewModel>(storedImage));
+            }
 
             return View("Partials/EditForm", image);
         }

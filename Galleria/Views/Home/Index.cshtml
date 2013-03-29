@@ -42,6 +42,8 @@
     @Scripts.Render("~/bundles/homepage")
     <script type="text/javascript" src="~/signalr/hubs"></script>
     <script type="text/javascript">
+        var viewModel;
+
         $(function () {
             // Proxy created on the fly          
             var pictureprocesshub = $.connection.pictureProcessHub;
@@ -57,7 +59,7 @@
             $.connection.hub.start();
 
 
-            var viewModel = { processedImages: ko.observableArray([]) }
+            viewModel = { processedImages: ko.observableArray([]) }
             ko.applyBindings(viewModel);
 
             var image = new Object();
@@ -91,5 +93,10 @@
                 return false;
             });
         });
+
+        function hideModalForm()
+        {
+            $('#model-form').modal('hide')
+        }
     </script>
 }

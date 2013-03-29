@@ -6,7 +6,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="editFormLabel">Image details</h3>
 </div>
-@using (Ajax.BeginForm("Edit", "ImageDetails", FormMethod.Post, null))
+@using (Ajax.BeginForm("Edit", "ImageDetails", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "editComplete" }))
 {
     @Html.HiddenFor(a => a.Id);
     <div class="modal-body">
@@ -21,6 +21,18 @@
 }
 
 <script type="text/javascript">
+    function editComplete(data)
+    {
+        //this mapping should take place in the controller
+        data.LazyLoadUrl = data.PreviewUrl;
+        //find this image in the observable array
+        var image = ko.utils.arrayFirst(viewModel.processedImages(), function(currentImage) {
+            return currentImage.Id === data.Id;
+        });
+        viewModel.processedImages.replace(image, data);    
+        hideModalForm();
+    }
+
     $(".tagManager").tagsManager({
         @if (!string.IsNullOrWhiteSpace(Model.ExistingTagsJson)) {
             @:prefilled: @Html.Raw(Model.ExistingTagsJson),
