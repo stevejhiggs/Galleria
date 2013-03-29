@@ -25,7 +25,7 @@
                 <a data-bind="attr: { 'href': '@(Url.Action("Index", "Slideshow"))?startImageId=' + Id }">
                     <img class="lazyImage" data-bind="attr: { src: LazyLoadUrl, 'data-original': PreviewUrl }" />
                 </a>
-                <div class="name"><span data-bind="text: Name">&nbsp;</span><a data-bind="    attr: { 'data-modalform': '/ImageDetails/Edit?Id=' + Id }" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
+                <div class="name"><span data-bind="text: Name">&nbsp;</span><a data-bind="click: showEditDialog" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
             </div>
         </li>
     </script>
@@ -82,19 +82,26 @@
 
 
             $("a[data-modalform]").click(function () {
-                var href = $(this).attr("data-modalform");
-                //load destination via ajax
-                $.get(href, function (data) {
-                    //inject into modal container
-                    $("#modal-content-container").html(data);
-                    $('#model-form').modal();
-                })
+                showEditDialog($(this));
 
                 return false;
             });
         });
 
-        function hideModalForm()
+        function showEditDialog(src)
+        {
+            var href = '/ImageDetails/Edit?Id=' + src.Id;;
+            //load destination via ajax
+            $.get(href, function (data) {
+                //inject into modal container
+                $("#modal-content-container").html(data);
+                $('#model-form').modal();
+            })
+
+            return false;
+        }
+
+        function hideEditDialog()
         {
             $('#model-form').modal('hide')
         }

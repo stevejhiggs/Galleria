@@ -30,7 +30,7 @@
             return currentImage.Id === data.Id;
         });
         viewModel.processedImages.replace(image, data);    
-        hideModalForm();
+        hideEditDialog();
     }
 
     $(".tagManager").tagsManager({
