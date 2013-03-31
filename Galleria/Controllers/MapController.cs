@@ -31,10 +31,16 @@ namespace Galleria.Controllers
             {
                 model.CentreLatitude = existingMedia[0].Latitude.Value;
                 model.CentreLongitude = existingMedia[0].Longitude.Value;
+                model.ZoomLevel = 10;
             }
-
-            model.ZoomLevel = 10;
-
+            else
+            {
+                //no images, show the entire uk
+                model.CentreLatitude = 54.444492;
+                model.CentreLongitude = -4.053955;
+                model.ZoomLevel = 6;
+            }
+            
             return View(model);
         }
     }
