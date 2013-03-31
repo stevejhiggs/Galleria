@@ -25,6 +25,7 @@ namespace Galleria
 
             bundles.Add(new StyleBundle("~/Content/cssbase").Include(
                         "~/Content/BootstrapCss/bootstrap.css",
+                        "~/Content/font-awesome.css",
                         "~/Content/site.css",
                         "~/Content/bootstrap-tagmanager.css"
                         ));

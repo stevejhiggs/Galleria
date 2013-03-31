@@ -22,25 +22,30 @@ ul.btn-nav li {
   display: inline-block;
   padding-right: 1rem;
 }
-#uploadBox {
-  width: 10em;
-  height: 10em;
-  border: 3px dashed #808080;
-  border-radius: 8px;
+#uploadContainer {
   text-align: center;
-  background: #e1e1e1;
-  font-size: 1.5em;
   vertical-align: middle;
-  padding: 1em;
+  width: 20em;
   line-height: 1.25em;
+  font-size: 1.5em;
+  height: 20em;
 }
-#uploadBox span {
+#uploadContainer span {
   display: inline-block;
-  margin-top: 4em;
+  font-size: 1em;
+  width: 100%;
+}
+#uploadBox {
+  background: url('images/cloudupload.png') no-repeat #9aa5cf;
+  background-position: center;
+  border: 3px dashed #568EFF;
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
 }
 #uploadBox.over {
-  background: #3389a1;
-  border-color: white;
+  background-color: #A4CF87;
+  border-color: green;
 }
 ul.imageList {
   margin-top: 1em;

@@ -8,10 +8,11 @@
     </ul>
 }
 
-<div id="uploadBox">
-    <span>Drop files here to upload them</span>
+<div id="uploadContainer">
+    <div id="uploadBox">       
+    </div>
+    <span>Drag files onto the box above to upload them</span>
 </div>
-
 <ul data-bind="template: { name: 'upload-template', foreach: uploads }">
 </ul>
 <script type="text/html" id="upload-template">

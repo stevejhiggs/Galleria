@@ -194,6 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\BootstrapCss\bootstrap.css" />
+    <Content Include="Content\font-awesome.css">
+      <DependentUpon>font-awesome.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Fonts\glyphiconshalflings-regular.svg" />
+    <Content Include="Content\Images\cloudupload.png" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
     <Content Include="Content\Images\ImagePlaceholder.png" />
@@ -286,6 +292,15 @@
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.js</DependentUpon>
     </Content>
+    <Content Include="Content\Fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Fonts\FontAwesome.otf" />
+    <Content Include="Content\Fonts\glyphiconshalflings-regular.eot" />
+    <Content Include="Content\Fonts\glyphiconshalflings-regular.otf" />
+    <Content Include="Content\Fonts\glyphiconshalflings-regular.ttf" />
+    <Content Include="Content\Fonts\glyphiconshalflings-regular.woff" />
+    <Content Include="Content\font-awesome.less" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -337,7 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Fonts\" />
     <Folder Include="Uploads\Blocks\" />
     <Folder Include="Uploads\Thumbnails\" />
   </ItemGroup>
