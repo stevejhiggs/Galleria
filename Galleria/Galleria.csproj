@@ -171,9 +171,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddController.cs" />
     <Compile Include="Controllers\FileAssemblyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageDetailsController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseApiController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseController.cs" />
     <Compile Include="Controllers\SlideshowController.cs" />
@@ -327,11 +329,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Upload.cshtml" />
+    <Content Include="Views\Add\Index.cshtml" />
     <Content Include="Views\Slideshow\Index.cshtml" />
     <Content Include="Views\Shared\_Fullscreen.cshtml" />
     <Content Include="Views\ImageDetails\Partials\EditForm.cshtml" />
-    <Content Include="Views\Home\Map.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
