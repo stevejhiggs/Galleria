@@ -30,18 +30,13 @@ ul.btn-nav li {
 #uploadContainer {
   text-align: center;
   vertical-align: middle;
-  width: 20em;
+  width: 100%;
   line-height: 1.25em;
   font-size: 1.5em;
   height: 20em;
 }
-#uploadContainer span {
-  display: inline-block;
-  font-size: 1em;
-  width: 100%;
-}
 #uploadBox {
-  background: url('images/cloudupload.png') no-repeat #9aa5cf;
+  background: url('images/cloudupload.png') no-repeat, url(Images/background.png) #bbbbbb;
   background-position: center;
   border: 3px dashed rgba(255, 255, 255, 0.4);
   border-radius: 8px;

@@ -10,9 +10,13 @@
 {
     @Html.HiddenFor(a => a.Id);
     <div class="modal-body">
+        @Html.LabelFor(a => a.Name)
         @Html.EditorFor(a => a.Name)
         @Html.HiddenFor(a => a.HiddenTags)
-        <input type="text" name="tags" placeholder="Tags" class="tagManager" value=""/>
+        @Html.Label("Tags")
+        <div>
+            <input type="text" name="tags" placeholder="enter a new tag here" class="tagManager" value=""/>
+        </div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

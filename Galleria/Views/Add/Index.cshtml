@@ -8,16 +8,19 @@
     </ul>
 }
 
-<div id="uploadContainer">
-    <div id="uploadBox">       
+<div class="well col-span-8 col-offset-2">
+    <div id="uploadContainer">
+        <div id="uploadBox">
+        </div>
+        <span>Drag files onto the box above to upload them</span>
     </div>
-    <span>Drag files onto the box above to upload them</span>
+    <ul data-bind="template: { name: 'upload-template', foreach: uploads }">
+    </ul>
 </div>
-<ul data-bind="template: { name: 'upload-template', foreach: uploads }">
-</ul>
+
 <script type="text/html" id="upload-template">
     <li><span>Uploaded: <small data-bind="text: Name"></small>.</span><span>Size: <small
-        data-bind="text: Size"></small></span><span>Server path: <a data-bind="attr:{href: Path}, text:Path"></a></span></li>
+        data-bind="text: Size"></small></span><span>Server path: <a data-bind="    attr: { href: Path }, text: Path"></a></span></li>
 </script>
 
 
