@@ -19,7 +19,7 @@ namespace Galleria.Controllers
             if (!string.IsNullOrWhiteSpace(searchText))
             {
                 results = await RavenSession.Query<SearchIndex.ReduceResult, SearchIndex>()
-                   .Where(x => x.SearchQuery == (object)searchText)
+                    .Search(x => x.SearchQuery,string.Format("{0}*",searchText), escapeQueryOptions: EscapeQueryOptions.AllowPostfixWildcard)
                    .As<StoredImage>()
                     .ToListAsync();
             }
