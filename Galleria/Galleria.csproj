@@ -172,10 +172,11 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AddController.cs" />
-    <Compile Include="Controllers\FileAssemblyController.cs" />
+    <Compile Include="Controllers\Api\FileAssemblyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageDetailsController.cs" />
     <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\Api\ImageCollectionController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseApiController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseController.cs" />
     <Compile Include="Controllers\SlideshowController.cs" />

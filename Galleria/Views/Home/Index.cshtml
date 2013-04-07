@@ -17,7 +17,7 @@
 }
 <div class="row">
     <div class="col-span-8 col-offset-2">
-        <input type="text" class="search-query" />
+        <input type="text" class="search-query" data-bind='value: searchValue, valueUpdate: "afterkeydown"' />
     </div>   
 </div>
 
@@ -64,10 +64,7 @@
             };
 
             // Start the connection
-            $.connection.hub.start();
-
-
-            
+            $.connection.hub.start();  
 
             ko.utils.arrayPushAll(viewModel.processedImages(), @Model.ImageCollectionJson);
             viewModel.processedImages.valueHasMutated();
@@ -104,6 +101,20 @@
         function homepageViewModel()
         {
             this.processedImages =  ko.observableArray([]);
+
+            this.searchValue = ko.observable();
+            this.throttledSearchValue = ko.computed(this.searchValue)
+                                    .extend({ throttle: 400 });
+
+            this.throttledSearchValue.subscribe(function (val) {
+                search(val);
+            }, this);
         }
+
+        function search(searchText)
+        {
+            console.log(searchText);
+        }
+
     </script>
 }
