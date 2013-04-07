@@ -15,6 +15,11 @@
         <li><a href="@Url.Action("Index", "Add")" class="btn btn-primary">add pictures</a></li>
     </ul>
 }
+<div class="row">
+    <div class="col-span-8 col-offset-2">
+        <input type="text" class="search-query" />
+    </div>   
+</div>
 
 <div class="row">
     <ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }">
@@ -43,8 +48,11 @@
     <script type="text/javascript" src="~/signalr/hubs"></script>
     <script type="text/javascript">
         var viewModel;
-
+        
         $(function () {
+            viewModel = new homepageViewModel();
+            ko.applyBindings(viewModel);
+
             // Proxy created on the fly          
             var pictureprocesshub = $.connection.pictureProcessHub;
 
@@ -59,8 +67,7 @@
             $.connection.hub.start();
 
 
-            viewModel = { processedImages: ko.observableArray([]) }
-            ko.applyBindings(viewModel);
+            
 
             ko.utils.arrayPushAll(viewModel.processedImages(), @Model.ImageCollectionJson);
             viewModel.processedImages.valueHasMutated();
@@ -92,6 +99,11 @@
         function hideEditDialog()
         {
             $('#model-form').modal('hide')
+        }
+
+        function homepageViewModel()
+        {
+            this.processedImages =  ko.observableArray([]);
         }
     </script>
 }
