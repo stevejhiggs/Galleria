@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Galleria.Controllers
 {
-    public class SearchController : RavenBaseApiController
+    public class ImageCollectionController : RavenBaseApiController
     {
         public async Task<IEnumerable<ProcessedImageViewModel>> Get(string searchText = null)
         {

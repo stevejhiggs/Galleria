@@ -53,6 +53,64 @@
             viewModel = new homepageViewModel();
             ko.applyBindings(viewModel);
 
+            setupSignalR();
+            showAllImages(true);
+            
+            $("a[data-modalform]").click(function () {
+                showEditDialog($(this));
+                return false;
+            });
+        });
+
+        function showAllImages(forceImageLoad)
+        {
+            jQuery.support.cors = true;
+            $.ajax({
+                url: '@Url.Content("~/api/imagecollection")',
+                type: 'GET',
+                dataType: 'json',            
+                success: function (data) {  
+                    refreshImageDisplay(data, forceImageLoad);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });   
+        }
+
+        function searchImages(searchText)
+        {
+            jQuery.support.cors = true;
+            $.ajax({
+                url: '@Url.Content("~/api/imagecollection")' + '?searchtext=' + searchText,
+                type: 'GET',
+                dataType: 'json',            
+                success: function (data) {  
+                    refreshImageDisplay(data, true);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            }); 
+        }
+
+        function refreshImageDisplay(images, forceImageLoad)
+        {
+            viewModel.processedImages.removeAll();
+            ko.utils.arrayPushAll(viewModel.processedImages(), images);
+            viewModel.processedImages.valueHasMutated();
+            $("img.lazyImage").lazyload({
+                effect: "fadeIn"
+            });
+  
+            if (forceImageLoad == true)
+            {
+                $("img.lazyImage").trigger("scroll");
+            }
+        }
+
+        function setupSignalR()
+        {
             // Proxy created on the fly          
             var pictureprocesshub = $.connection.pictureProcessHub;
 
@@ -65,20 +123,7 @@
 
             // Start the connection
             $.connection.hub.start();  
-
-            ko.utils.arrayPushAll(viewModel.processedImages(), @Model.ImageCollectionJson);
-            viewModel.processedImages.valueHasMutated();
-
-            $("img.lazyImage").lazyload({
-                effect: "fadeIn"
-            });
-
-
-            $("a[data-modalform]").click(function () {
-                showEditDialog($(this));
-                return false;
-            });
-        });
+        }
 
         function showEditDialog(src)
         {
@@ -107,13 +152,8 @@
                                     .extend({ throttle: 400 });
 
             this.throttledSearchValue.subscribe(function (val) {
-                search(val);
+                searchImages(val);
             }, this);
-        }
-
-        function search(searchText)
-        {
-            console.log(searchText);
         }
 
     </script>
