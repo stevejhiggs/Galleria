@@ -17,7 +17,7 @@
 }
 <div class="row">
     <div class="col-span-8 col-offset-2">
-        <input type="text" class="search-query" data-bind='value: searchValue, valueUpdate: "afterkeydown"' />
+        <input type="text" placeholder="search..." class="search-query" data-bind='value: searchValue, valueUpdate: "afterkeydown"' />
     </div>   
 </div>
 
@@ -54,7 +54,7 @@
             ko.applyBindings(viewModel);
 
             setupSignalR();
-            showAllImages(true);
+            showAllImages();
             
             $("a[data-modalform]").click(function () {
                 showEditDialog($(this));
@@ -62,7 +62,7 @@
             });
         });
 
-        function showAllImages(forceImageLoad)
+        function showAllImages()
         {
             jQuery.support.cors = true;
             $.ajax({
@@ -70,7 +70,7 @@
                 type: 'GET',
                 dataType: 'json',            
                 success: function (data) {  
-                    refreshImageDisplay(data, forceImageLoad);
+                    refreshImageDisplay(data);
                 },
                 error: function (x, y, z) {
                     alert(x + '\n' + y + '\n' + z);
@@ -86,7 +86,7 @@
                 type: 'GET',
                 dataType: 'json',            
                 success: function (data) {  
-                    refreshImageDisplay(data, true);
+                    refreshImageDisplay(data);
                 },
                 error: function (x, y, z) {
                     alert(x + '\n' + y + '\n' + z);
@@ -94,7 +94,7 @@
             }); 
         }
 
-        function refreshImageDisplay(images, forceImageLoad)
+        function refreshImageDisplay(images)
         {
             viewModel.processedImages.removeAll();
             ko.utils.arrayPushAll(viewModel.processedImages(), images);
@@ -102,11 +102,8 @@
             $("img.lazyImage").lazyload({
                 effect: "fadeIn"
             });
-  
-            if (forceImageLoad == true)
-            {
-                $("img.lazyImage").trigger("scroll");
-            }
+
+            $('body').trigger("lazyupdate");
         }
 
         function setupSignalR()

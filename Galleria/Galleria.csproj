@@ -310,6 +310,9 @@
     <Content Include="Scripts\jquery-ui-1.10.2.min.js" />
     <Content Include="Scripts\jquery.lazyload.js" />
     <Content Include="Scripts\jquery.lazyload.min.js" />
+    <Content Include="Scripts\jquery.lazyload.min.js.map">
+      <DependentUpon>jquery.lazyload.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery.signalR-1.0.1.js" />
     <Content Include="Scripts\jquery.signalR-1.0.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -324,9 +327,6 @@
     <Content Include="Scripts\supersized.shutter.js" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery.easing.1.3.js" />
-    <Content Include="Scripts\jquery.lazyload.min.js.map">
-      <DependentUpon>jquery.lazyload.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\supersized.3.2.7.min.js" />

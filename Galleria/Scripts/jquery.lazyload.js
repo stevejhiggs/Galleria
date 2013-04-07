@@ -132,6 +132,10 @@
             update();
         });
 
+        $('body').bind("lazyupdate", function (event) {
+            update();
+        });
+
         /* With IOS5 force loading images when navigating with back button. */
         /* Non optimal workaround. */
         if ((/iphone|ipod|ipad.*os 5/gi).test(navigator.appVersion)) {

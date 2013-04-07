@@ -103,4 +103,6 @@ input[type="text"].search-query {
   text-transform: lowercase;
   text-align: center;
   font-weight: normal;
+  font-size: 1.5em;
+  line-height: 1.5em;
 }
