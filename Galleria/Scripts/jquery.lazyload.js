@@ -125,6 +125,8 @@
                     }
                 });
             }
+
+            update();
         });
 
         /* Check if something appears when window is resized. */

@@ -102,6 +102,10 @@
             });
 
             $('body').trigger("lazyupdate");
+
+            setTimeout(function(){
+                $('body').trigger("lazyupdate");
+            }, 10);
         }
 
         function setupSignalR()
