@@ -334,6 +334,8 @@
     <Content Include="Scripts\supersized.3.2.7.min.js" />
     <Content Include="Scripts\Upload.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\Blocks\Readme.txt" />
+    <Content Include="Uploads\Thumbnails\readme.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -354,8 +356,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\Blocks\" />
-    <Folder Include="Uploads\Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

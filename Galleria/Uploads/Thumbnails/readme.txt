@@ -1,0 +1,1 @@
+Thumbnails get stored here

@@ -1,0 +1,1 @@
+Blocks get stored in here, joined together as files, move to the main folder then the blocks are deleted
