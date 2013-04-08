@@ -200,6 +200,7 @@
     </Content>
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Fonts\glyphiconshalflings-regular.svg" />
+    <Content Include="Content\Images\background.png" />
     <Content Include="Content\Images\cloudupload.png" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
