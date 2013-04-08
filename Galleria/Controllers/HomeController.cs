@@ -17,19 +17,7 @@ namespace Galleria.Controllers
 
         public ActionResult Index()
         {
-            var uploadInfo = RavenSession.Query<StoredImage>().OrderByDescending(i => i.UploadDateTime).Take(1000).ToArray();
-            IList<ProcessedImageViewModel> existingMedia = new List<ProcessedImageViewModel>();
-            foreach (var upload in uploadInfo)
-            {
-                var item = Mapper.Map<ProcessedImageViewModel>(upload);
-                item.LazyLoadPlaceholderUrl = Url.Content("~/Content/Images/ImagePlaceholder.png");
-                existingMedia.Add(item);
-            }
-
-            var viewModel = new IndexViewModel();
-            viewModel.ImageCollectionJson = new HtmlString(JsonConvert.SerializeObject(existingMedia.ToArray()));
-
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult Upload()
