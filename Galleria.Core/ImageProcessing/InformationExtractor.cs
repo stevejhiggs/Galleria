@@ -1,4 +1,5 @@
 ﻿using Galleria.Core.Services.FileStorage;
+using System.IO;
 
 namespace Galleria.Core.ImageProcessing
 {
@@ -21,8 +22,14 @@ namespace Galleria.Core.ImageProcessing
 
             //probably want to do initial rotation here
 
+            //for now read out the file directly
+            byte[] input = File.ReadAllBytes(ImagePathBase + info.FileName);
+
             ThumbnailGenerator thumbGen = new ThumbnailGenerator();
-            thumbGen.GenerateThumbnail(ImagePathBase + info.FileName, ThumbnailPathBase + info.FileName, ThumbnailMaxHeight);
+            byte[] thumbnailBytes = thumbGen.GenerateThumbnail(input, ThumbnailMaxHeight);
+
+            //for now save file directly
+            File.WriteAllBytes(ThumbnailPathBase + info.FileName, thumbnailBytes);
             info.ThumbnailPath = ThumbnailPathBase + info.FileName;
             return info;
         }
