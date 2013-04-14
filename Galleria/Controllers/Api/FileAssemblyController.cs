@@ -41,7 +41,7 @@ namespace Galleria.Controllers
             extractor.ImagePathBase = mappedFilePath;
             extractor.ThumbnailPathBase = mappedThumbnailPath;
             extractor.ThumbnailMaxHeight = 200;
-            ExtractedImageInformation exInfo = extractor.GetImageInformation(savedFileInformation);
+            ExtractedImageInformation exInfo = extractor.GetImageInformation(savedFileInformation, ChunkedFileStorageService);
 
             //write to raven
             StoredImage info = Mapper.Map<StoredImage>(exInfo);

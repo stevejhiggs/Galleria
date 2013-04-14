@@ -24,8 +24,8 @@ namespace Galleria.Core.Services.FileStorage
         /// <summary>
         /// Get back a file for further processing
         /// </summary>
-        /// <param name="id">The image id</param>
+        /// <param name="file">The file to retrieve</param>
         /// <returns></returns>
-        //Task<Stream> RetrieveFileContents(string id);
+        byte[] RetrieveFileContents(ISavedFile file, FileType fileType);
     }
 }

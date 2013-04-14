@@ -123,5 +123,32 @@ namespace Galleria.Core.Services.FileStorage.Implementations
 
             return null;
         }
+
+        //todo, make async, will need to filestream to a memstream
+        public byte[] RetrieveFileContents(ISavedFile file, FileType fileType)
+        {
+            string fileLocation = GetFileStoragePath(file, fileType);
+            if (File.Exists(fileLocation))
+            {
+                return File.ReadAllBytes(fileLocation);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private string GetFileStoragePath(ISavedFile file, FileType fileType)
+        {
+            switch (fileType)
+            {
+                case FileType.File:
+                    return FileStoragePath + file.FileName;
+                case FileType.Preview:
+                    return PreviewStoragePath + file.FileName;
+            }
+
+            return null;
+        }
     }
 }
