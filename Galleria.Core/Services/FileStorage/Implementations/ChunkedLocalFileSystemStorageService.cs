@@ -110,15 +110,24 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             return fileInfo;
         }
 
+        //todo: make async
+        public ISavedFile SaveFileWithoutChunking(string fileName, FileType fileType, byte[] fileContents)
+        {
+            string storageFileName = string.Format("{0}-{1}", Guid.NewGuid(), fileName);
+            string savePath = GetFileStoragePath(storageFileName, fileType);
+            File.WriteAllBytes(savePath, fileContents);
+            return new SavedFile() { Name = fileName, FileName = storageFileName };
+        }
 
-        public string GetFileStorageUri(ISavedFile file, FileType fileType)
+
+        public string GetFileStorageUri(string fileName, FileType fileType)
         {
             switch (fileType)
             {
                 case FileType.File:
-                    return FileStorageUri + file.FileName;
+                    return FileStorageUri + fileName;
                 case FileType.Preview:
-                    return PreviewStorageUri + file.FileName;
+                    return PreviewStorageUri + fileName;
             }
 
             return null;
@@ -127,7 +136,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
         //todo, make async, will need to filestream to a memstream
         public byte[] RetrieveFileContents(ISavedFile file, FileType fileType)
         {
-            string fileLocation = GetFileStoragePath(file, fileType);
+            string fileLocation = GetFileStoragePath(file.FileName, fileType);
             if (File.Exists(fileLocation))
             {
                 return File.ReadAllBytes(fileLocation);
@@ -138,14 +147,14 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             }
         }
 
-        private string GetFileStoragePath(ISavedFile file, FileType fileType)
+        private string GetFileStoragePath(string fileName, FileType fileType)
         {
             switch (fileType)
             {
                 case FileType.File:
-                    return FileStoragePath + file.FileName;
+                    return FileStoragePath + fileName;
                 case FileType.Preview:
-                    return PreviewStoragePath + file.FileName;
+                    return PreviewStoragePath + fileName;
             }
 
             return null;

@@ -16,7 +16,7 @@ namespace Galleria.Core.ImageProcessing
             //TODO, I Should be a parallel async call
             ExtractedImageInformation info = new ExtractedImageInformation();
             info.FileName = savedFileInformation.FileName;
-            info = new TaglibExtractor().ExtractTags(fileStorageService.GetFileStorageUri(savedFileInformation, FileType.File), input, info);
+            info = new TaglibExtractor().ExtractTags(fileStorageService.GetFileStorageUri(savedFileInformation.FileName, FileType.File), input, info);
             if (string.IsNullOrWhiteSpace(info.Name))
             {
                 info.Name = savedFileInformation.Name;
@@ -24,14 +24,11 @@ namespace Galleria.Core.ImageProcessing
 
             //probably want to do initial rotation here
 
-            
-
             ThumbnailGenerator thumbGen = new ThumbnailGenerator();
             byte[] thumbnailBytes = thumbGen.GenerateThumbnail(input, ThumbnailMaxHeight);
+            ISavedFile thumbnailFile = fileStorageService.SaveFileWithoutChunking(info.FileName, FileType.Preview, thumbnailBytes);
 
-            //for now save file directly
-            File.WriteAllBytes(ThumbnailPathBase + info.FileName, thumbnailBytes);
-            info.ThumbnailPath = ThumbnailPathBase + info.FileName;
+            info.PreviewFileName = thumbnailFile.FileName;
             return info;
         }
     }

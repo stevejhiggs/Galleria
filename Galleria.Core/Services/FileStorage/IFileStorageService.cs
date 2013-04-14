@@ -15,11 +15,20 @@ namespace Galleria.Core.Services.FileStorage
         Task<IEnumerable<ISavedFile>> SaveFilesWithoutChunkingAsync(HttpRequestMessage httpRequest);
 
         /// <summary>
+        /// Save a single byte stream to a file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="fileType"></param>
+        /// <param name="fileContents"></param>
+        /// <returns></returns>
+        ISavedFile SaveFileWithoutChunking(string fileName, FileType fileType, byte[] fileContents);
+
+        /// <summary>
         /// Get a files uri from the storage system
         /// </summary>
         /// <param name="storageFileName"></param>
         /// <returns></returns>
-        string GetFileStorageUri(ISavedFile file, FileType fileType);
+        string GetFileStorageUri(string fileName, FileType fileType);
 
         /// <summary>
         /// Get back a file for further processing
