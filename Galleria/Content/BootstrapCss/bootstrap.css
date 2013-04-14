@@ -322,7 +322,6 @@ a:focus {
 }
 
 img {
-  width: auto\9;
   height: auto;
   max-width: 100%;
   vertical-align: middle;
@@ -1274,6 +1273,12 @@ input[type="button"],
 input[type="radio"],
 input[type="checkbox"] {
   width: auto;
+}
+
+input[type="search"] {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 textarea {
@@ -2855,6 +2860,7 @@ fieldset[disabled] .btn-link:focus {
   font-weight: normal;
   line-height: 20px;
   color: #333333;
+  white-space: nowrap;
 }
 
 .dropdown-menu > li > a:hover,
@@ -4302,17 +4308,18 @@ button.close {
 }
 
 .modal-header {
-  padding: 9px 15px;
+  min-height: 35px;
+  padding: 15px;
   border-bottom: 1px solid #e5e5e5;
 }
 
 .modal-header .close {
-  margin-top: 2px;
+  margin-top: -2px;
 }
 
 .modal-title {
   margin: 0;
-  line-height: 30px;
+  line-height: 20px;
 }
 
 .modal-body {
@@ -4624,11 +4631,10 @@ button.close {
   color: #a47e3c;
 }
 
-.close {
+.alert .close {
   position: relative;
   top: -2px;
   right: -21px;
-  line-height: 20px;
   color: inherit;
 }
 
