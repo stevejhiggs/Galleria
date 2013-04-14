@@ -6,6 +6,6 @@ namespace Galleria.Core.Services.FileStorage
         //filename that was uploaded
         string Name { get; set; }
         //file name decided on by the storage system
-        string Filename { get; set; }
+        string FileName { get; set; }
     }
 }

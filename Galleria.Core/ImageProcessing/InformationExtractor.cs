@@ -11,10 +11,14 @@ namespace Galleria.Core.ImageProcessing
 
         public ExtractedImageInformation GetImageInformation(ISavedFile savedFileInformation)
         {
+            //for now read out the file directly
+            string inputPath = ImagePathBase + savedFileInformation.FileName;
+            byte[] input = File.ReadAllBytes(inputPath);
+
             //TODO, I Should be a parallel async call
             ExtractedImageInformation info = new ExtractedImageInformation();
-            info.FileName = savedFileInformation.Filename;
-            info = new TaglibExtractor().ExtractTags(ImagePathBase + info.FileName, info);
+            info.FileName = savedFileInformation.FileName;
+            info = new TaglibExtractor().ExtractTags(inputPath, input, info);
             if (string.IsNullOrWhiteSpace(info.Name))
             {
                 info.Name = savedFileInformation.Name;
@@ -22,8 +26,7 @@ namespace Galleria.Core.ImageProcessing
 
             //probably want to do initial rotation here
 
-            //for now read out the file directly
-            byte[] input = File.ReadAllBytes(ImagePathBase + info.FileName);
+            
 
             ThumbnailGenerator thumbGen = new ThumbnailGenerator();
             byte[] thumbnailBytes = thumbGen.GenerateThumbnail(input, ThumbnailMaxHeight);

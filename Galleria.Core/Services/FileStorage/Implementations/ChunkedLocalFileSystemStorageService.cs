@@ -84,7 +84,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
                 File.Delete(srcFileName);
             }
 
-            return new SavedFile() { Name = assemblyRequest.Filename, Filename = storageFileName };
+            return new SavedFile() { Name = assemblyRequest.Filename, FileName = storageFileName };
         }
 
         public async Task<IEnumerable<ISavedFile>> SaveFilesWithoutChunkingAsync(HttpRequestMessage httpRequest)
@@ -104,7 +104,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
 
                 //TODO figure out async move
                 File.Move(FileStoragePath + info.Name, FileStoragePath + storageFileName);
-                return new SavedFile() { Name = info.Name, Filename = storageFileName };
+                return new SavedFile() { Name = info.Name, FileName = storageFileName };
             });
 
             return fileInfo;
@@ -116,9 +116,9 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             switch (fileType)
             {
                 case FileType.File:
-                    return FileStorageUri + file.Filename;
+                    return FileStorageUri + file.FileName;
                 case FileType.Preview:
-                    return PreviewStorageUri + file.Filename;
+                    return PreviewStorageUri + file.FileName;
             }
 
             return null;
