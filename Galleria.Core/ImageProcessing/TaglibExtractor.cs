@@ -15,7 +15,7 @@ namespace Galleria.Core.ImageProcessing
                     info.Latitude = imageFile.ImageTag.Latitude;
                     info.Longitude = imageFile.ImageTag.Latitude;
                     info.Timestamp = imageFile.ImageTag.DateTime;
-                    info.Name = imageFile.ImageTag.Title;
+                    info.Title = imageFile.ImageTag.Title;
                     return info;
                 }
             }

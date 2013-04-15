@@ -1,9 +1,9 @@
 ﻿
 namespace Galleria.Core.Services.FileStorage
 {
-    internal class SavedFile : ISavedFile
+    public class SavedFile : ISavedFile
     {
-        public string Name { get; set; }
-        public string FileName { get; set; }
+        public string UploadedFileName { get; set; }
+        public string StorageFileName { get; set; }
     }
 }

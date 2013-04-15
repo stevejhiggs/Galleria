@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace Galleria.Core.Models
 {
-    public class StoredImage : ISavedFile
+    public class StoredImage
     {
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string FileName { get; set; }
-        public string PreviewFileName { get; set; }
+        public string Title { get; set; }
+        public SavedFile File { get; set; }
+        public SavedFile Preview { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public int Orientation { get; set; }

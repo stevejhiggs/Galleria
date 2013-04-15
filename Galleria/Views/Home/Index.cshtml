@@ -28,7 +28,7 @@
                 <a data-bind="attr: { 'href': '@(Url.Action("Index", "Slideshow"))?startImageId=' + Id }">
                     <img class="lazyImage" data-bind="attr: { src: LazyLoadPlaceholderUrl, 'data-original': PreviewUrl }" />
                 </a>
-                <div class="name"><span data-bind="text: Name">&nbsp;</span><a data-bind="click: showEditDialog" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
+                <div class="name"><span data-bind="text: Title">&nbsp;</span><a data-bind="click: showEditDialog" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
             </div>
         </li>
     </script>

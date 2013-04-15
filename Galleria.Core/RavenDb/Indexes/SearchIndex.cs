@@ -25,7 +25,7 @@ namespace Galleria.Core.RavenDb.Indexes
                 {
                     SearchQuery = i.Tags.Concat(new []
                     {
-                        i.Name
+                        i.Title
                     }),
                     UploadDateTime = i.UploadDateTime
                 };

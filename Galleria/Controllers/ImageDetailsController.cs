@@ -32,7 +32,7 @@ namespace Galleria.Controllers
             if (ModelState.IsValid)
             {
                 var storedImage = RavenSession.Load<StoredImage>(image.Id);
-                storedImage.Name = image.Name;
+                storedImage.Title = image.Title;
 
                 //break apart the tags
                 if (image.HiddenTags != null)

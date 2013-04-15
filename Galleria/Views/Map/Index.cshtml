@@ -42,7 +42,7 @@
         var imagesLocations = [
             @foreach (var i in Model.Images)
             {
-                @Html.Raw(string.Format("['{0}', {1}, {2}, '<img src=\"{3}\" alt=\"{0}\"/>' ],", i.Name, i.Latitude, i.Longitude, i.PreviewUrl ))
+                @Html.Raw(string.Format("['{0}', {1}, {2}, '<img src=\"{3}\" alt=\"{0}\"/>' ],", i.Title, i.Latitude, i.Longitude, i.PreviewUrl ))
             }
         ];
 

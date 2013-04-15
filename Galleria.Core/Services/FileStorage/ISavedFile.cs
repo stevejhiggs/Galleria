@@ -4,8 +4,8 @@ namespace Galleria.Core.Services.FileStorage
     public interface ISavedFile
     {
         //filename that was uploaded
-        string Name { get; set; }
+        string UploadedFileName { get; set; }
         //file name decided on by the storage system
-        string FileName { get; set; }
+        string StorageFileName { get; set; }
     }
 }

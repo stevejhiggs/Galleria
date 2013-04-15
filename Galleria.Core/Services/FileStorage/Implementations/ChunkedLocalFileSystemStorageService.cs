@@ -84,7 +84,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
                 File.Delete(srcFileName);
             }
 
-            return new SavedFile() { Name = assemblyRequest.Filename, FileName = storageFileName };
+            return new SavedFile() { UploadedFileName = assemblyRequest.Filename, StorageFileName = storageFileName };
         }
 
         public async Task<IEnumerable<ISavedFile>> SaveFilesWithoutChunkingAsync(HttpRequestMessage httpRequest)
@@ -104,7 +104,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
 
                 //TODO figure out async move
                 File.Move(FileStoragePath + info.Name, FileStoragePath + storageFileName);
-                return new SavedFile() { Name = info.Name, FileName = storageFileName };
+                return new SavedFile() { UploadedFileName = info.Name, StorageFileName = storageFileName };
             });
 
             return fileInfo;
@@ -116,7 +116,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             string storageFileName = string.Format("{0}-{1}", Guid.NewGuid(), fileName);
             string savePath = GetFileStoragePath(storageFileName, fileType);
             File.WriteAllBytes(savePath, fileContents);
-            return new SavedFile() { Name = fileName, FileName = storageFileName };
+            return new SavedFile() { UploadedFileName = fileName, StorageFileName = storageFileName };
         }
 
 
@@ -136,7 +136,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
         //todo, make async, will need to filestream to a memstream
         public byte[] RetrieveFileContents(ISavedFile file, FileType fileType)
         {
-            string fileLocation = GetFileStoragePath(file.FileName, fileType);
+            string fileLocation = GetFileStoragePath(file.StorageFileName, fileType);
             if (File.Exists(fileLocation))
             {
                 return File.ReadAllBytes(fileLocation);
