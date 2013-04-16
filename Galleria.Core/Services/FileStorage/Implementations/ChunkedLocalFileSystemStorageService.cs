@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Galleria.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             PreviewStorageUri = VirtualPathUtility.ToAbsolute(previewStorageUri);
         }
 
-        public async Task<IEnumerable<ISavedBlock>> SaveAsBlocksAsync(HttpRequestMessage httpRequest)
+        public async Task<IEnumerable<SavedBlock>> SaveAsBlocksAsync(HttpRequestMessage httpRequest)
         {
             if (httpRequest.Content.IsMimeMultipartContent())
             {
@@ -56,7 +57,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             }
         }
 
-        public async Task<ISavedFile> AssembleFileFromBlocksAsync(IFileAssemblyRequest assemblyRequest)
+        public async Task<SavedFile> AssembleFileFromBlocksAsync(FileAssemblyRequest assemblyRequest)
         {
             string storageFileName = string.Format("{0}-{1}", Guid.NewGuid(), assemblyRequest.Filename);
             List<string> sourcefiles = new List<string>();
@@ -87,7 +88,7 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             return new SavedFile() { UploadedFileName = assemblyRequest.Filename, StorageFileName = storageFileName };
         }
 
-        public async Task<IEnumerable<ISavedFile>> SaveFilesWithoutChunkingAsync(HttpRequestMessage httpRequest)
+        public async Task<IEnumerable<SavedFile>> SaveFilesWithoutChunkingAsync(HttpRequestMessage httpRequest)
         {
             if (!httpRequest.Content.IsMimeMultipartContent())
             {
@@ -111,32 +112,23 @@ namespace Galleria.Core.Services.FileStorage.Implementations
         }
 
         //todo: make async
-        public ISavedFile SaveFileWithoutChunking(string fileName, FileType fileType, byte[] fileContents)
+        public SavedFile SaveFileWithoutChunking(string fileName, string category, byte[] fileContents)
         {
             string storageFileName = string.Format("{0}-{1}", Guid.NewGuid(), fileName);
-            string savePath = GetFileStoragePath(storageFileName, fileType);
+            string savePath = GetFileStoragePath(storageFileName, category);
             File.WriteAllBytes(savePath, fileContents);
-            return new SavedFile() { UploadedFileName = fileName, StorageFileName = storageFileName };
+            return new SavedFile() { UploadedFileName = fileName, StorageFileName = storageFileName, Category = category };
         }
 
-
-        public string GetFileStorageUri(string fileName, FileType fileType)
+        public string GetFileStorageUri(SavedFile file)
         {
-            switch (fileType)
-            {
-                case FileType.File:
-                    return FileStorageUri + fileName;
-                case FileType.Preview:
-                    return PreviewStorageUri + fileName;
-            }
-
-            return null;
+            return GetFileStorageUri(file.StorageFileName, file.Category);
         }
 
         //todo, make async, will need to filestream to a memstream
-        public byte[] RetrieveFileContents(ISavedFile file, FileType fileType)
+        public byte[] RetrieveFileContents(SavedFile file)
         {
-            string fileLocation = GetFileStoragePath(file.StorageFileName, fileType);
+            string fileLocation = GetFileStoragePath(file.StorageFileName, file.Category);
             if (File.Exists(fileLocation))
             {
                 return File.ReadAllBytes(fileLocation);
@@ -147,26 +139,37 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             }
         }
 
-        public void DeleteFile(ISavedFile file, FileType fileType)
+        public void DeleteFile(SavedFile file)
         {
-            string fileLocation = GetFileStoragePath(file.StorageFileName, fileType);
+            string fileLocation = GetFileStoragePath(file.StorageFileName, file.Category);
             if (File.Exists(fileLocation))
             {
                 File.Delete(fileLocation);
             }
         }
 
-        private string GetFileStoragePath(string fileName, FileType fileType)
+        private string GetFileStorageUri(string fileName, string category)
         {
-            switch (fileType)
+            switch (category)
             {
-                case FileType.File:
-                    return FileStoragePath + fileName;
-                case FileType.Preview:
-                    return PreviewStoragePath + fileName;
-            }
+                case "thumbnail":
+                    return PreviewStorageUri + fileName;
+                default:
+                    return FileStorageUri + fileName;
 
-            return null;
+            }
+        }
+
+        private string GetFileStoragePath(string fileName, string category)
+        {
+            switch (category)
+            {
+                case "thumbnail":
+                    return PreviewStoragePath + fileName;
+                default:
+                    return FileStoragePath + fileName;
+
+            }
         }
     }
 }

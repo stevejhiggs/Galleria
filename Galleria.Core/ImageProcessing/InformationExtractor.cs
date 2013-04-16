@@ -9,9 +9,9 @@ namespace Galleria.Core.ImageProcessing
         public string ThumbnailPathBase { get; set; }
         public int ThumbnailMaxHeight { get; set; }
 
-        public ExtractedImageInformation GetImageInformation(ISavedFile savedFileInformation, IFileStorageService fileStorageService)
+        public ExtractedImageInformation GetImageInformation(SavedFile savedFileInformation, IFileStorageService fileStorageService)
         {
-            byte[] input = fileStorageService.RetrieveFileContents(savedFileInformation, FileType.File);
+            byte[] input = fileStorageService.RetrieveFileContents(savedFileInformation);
 
             //TODO, I Should be a parallel async call
             ExtractedImageInformation info = new ExtractedImageInformation();
@@ -20,7 +20,7 @@ namespace Galleria.Core.ImageProcessing
             info.File.UploadedFileName = info.Preview.UploadedFileName = savedFileInformation.UploadedFileName;
 
             info.File.StorageFileName = savedFileInformation.StorageFileName;
-            info = new TaglibExtractor().ExtractTags(fileStorageService.GetFileStorageUri(savedFileInformation.StorageFileName, FileType.File), input, info);
+            info = new TaglibExtractor().ExtractTags(fileStorageService.GetFileStorageUri(savedFileInformation), input, info);
             if (string.IsNullOrWhiteSpace(info.Title))
             {
                 info.Title = savedFileInformation.UploadedFileName;
@@ -30,9 +30,9 @@ namespace Galleria.Core.ImageProcessing
 
             ThumbnailGenerator thumbGen = new ThumbnailGenerator();
             byte[] thumbnailBytes = thumbGen.GenerateThumbnail(input, ThumbnailMaxHeight);
-            ISavedFile thumbnailFile = fileStorageService.SaveFileWithoutChunking(savedFileInformation.UploadedFileName, FileType.Preview, thumbnailBytes);
+            SavedFile thumbnailFile = fileStorageService.SaveFileWithoutChunking(savedFileInformation.UploadedFileName, "thumbnail", thumbnailBytes);
 
-            info.Preview.StorageFileName = thumbnailFile.StorageFileName;
+            info.Preview = thumbnailFile;
             return info;
         }
     }

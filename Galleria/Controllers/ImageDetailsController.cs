@@ -71,8 +71,8 @@ namespace Galleria.Controllers
             {
                 RavenSession.Delete<StoredImage>(storedImage);
                 //delete any associated files
-                FileStorageService.DeleteFile(storedImage.Preview, FileType.Preview);
-                FileStorageService.DeleteFile(storedImage.File, FileType.File);
+                FileStorageService.DeleteFile(storedImage.Preview);
+                FileStorageService.DeleteFile(storedImage.File);
             }
 
             return Json(Mapper.Map<ProcessedImageViewModel>(storedImage));

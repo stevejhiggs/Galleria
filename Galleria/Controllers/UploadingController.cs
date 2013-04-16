@@ -19,7 +19,7 @@ namespace Galleria.Controllers
             ChunkedFileStorageService = chunkedFileStorageService;
         }
 
-        public Task<IEnumerable<ISavedBlock>> Post()
+        public Task<IEnumerable<SavedBlock>> Post()
         {
             try
             {

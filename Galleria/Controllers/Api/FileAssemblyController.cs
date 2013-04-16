@@ -28,9 +28,9 @@ namespace Galleria.Controllers
         }
 
         // GET api/fileassembly
-        public async Task<ISavedFile> Post(FileAssemblyRequest item)
+        public async Task<SavedFile> Post(FileAssemblyRequest item)
         {
-            ISavedFile savedFileInformation = await ChunkedFileStorageService.AssembleFileFromBlocksAsync(item);
+            SavedFile savedFileInformation = await ChunkedFileStorageService.AssembleFileFromBlocksAsync(item);
 
             string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);
             string mappedThumbnailPath = HttpContext.Current.Server.MapPath(thumbnailPath);

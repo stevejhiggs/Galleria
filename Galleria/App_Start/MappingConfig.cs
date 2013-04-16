@@ -13,8 +13,8 @@ namespace Galleria
         public static void SetupMappings()
         {
             Mapper.CreateMap<StoredImage, ProcessedImageViewModel>()
-                    .ForMember(m => m.Url, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.File.StorageFileName, FileType.File))))
-                    .ForMember(m => m.PreviewUrl, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.Preview.StorageFileName, FileType.Preview))));
+                    .ForMember(m => m.Url, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.File))))
+                    .ForMember(m => m.PreviewUrl, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.Preview))));
 
             Mapper.CreateMap<ExtractedImageInformation, StoredImage>()
                     .ForMember(m => m.Id, v => v.MapFrom(s => Guid.NewGuid().ToString()));

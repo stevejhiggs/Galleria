@@ -84,13 +84,9 @@
     <Compile Include="RavenDb\Indexes\StoredImageSpatialIndex.cs" />
     <Compile Include="RavenDb\Session\IRavenDocumentSessionFactory.cs" />
     <Compile Include="RavenDb\Session\RavenDocumentStore.cs" />
-    <Compile Include="Services\FileStorage\FileStorageEnums.cs" />
     <Compile Include="Services\FileStorage\IChunkedFileStorageService.cs" />
-    <Compile Include="Services\FileStorage\IFileAssemblyRequest.cs" />
     <Compile Include="Services\FileStorage\IFileStorageService.cs" />
     <Compile Include="Services\FileStorage\Implementations\ChunkedLocalFileSystemStorageService.cs" />
-    <Compile Include="Services\FileStorage\ISavedBlock.cs" />
-    <Compile Include="Services\FileStorage\ISavedFile.cs" />
     <Compile Include="Services\FileStorage\SavedBlock.cs" />
     <Compile Include="Services\FileStorage\SavedFile.cs" />
   </ItemGroup>
