@@ -36,5 +36,7 @@ namespace Galleria.Core.Services.FileStorage
         /// <param name="file">The file to retrieve</param>
         /// <returns></returns>
         byte[] RetrieveFileContents(ISavedFile file, FileType fileType);
+
+        void DeleteFile(ISavedFile file, FileType fileType);
     }
 }

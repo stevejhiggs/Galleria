@@ -147,6 +147,15 @@ namespace Galleria.Core.Services.FileStorage.Implementations
             }
         }
 
+        public void DeleteFile(ISavedFile file, FileType fileType)
+        {
+            string fileLocation = GetFileStoragePath(file.StorageFileName, fileType);
+            if (File.Exists(fileLocation))
+            {
+                File.Delete(fileLocation);
+            }
+        }
+
         private string GetFileStoragePath(string fileName, FileType fileType)
         {
             switch (fileType)

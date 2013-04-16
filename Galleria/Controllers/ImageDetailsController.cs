@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Galleria.Core.Models;
+using Galleria.Core.Services.FileStorage;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
 using Newtonsoft.Json;
@@ -10,6 +11,15 @@ namespace Galleria.Controllers
 {
     public class ImageDetailsController : RavenBaseController
     {
+        private IFileStorageService FileStorageService;
+
+        public ImageDetailsController(IFileStorageService fileStorageService)
+        {
+            FileStorageService = fileStorageService;
+        }
+
+        //Todo this entire thing should be handled in the api.
+
         //
         // GET: /ImageDetails/Details/5
 
@@ -53,5 +63,19 @@ namespace Galleria.Controllers
             return View("Partials/EditForm", image);
         }
 
+        [HttpPost]
+        public ActionResult Delete(string imageId)
+        {
+            var storedImage = RavenSession.Load<StoredImage>(imageId);
+            if (storedImage != null)
+            {
+                RavenSession.Delete<StoredImage>(storedImage);
+                //delete any associated files
+                FileStorageService.DeleteFile(storedImage.Preview, FileType.Preview);
+                FileStorageService.DeleteFile(storedImage.File, FileType.File);
+            }
+
+            return Json(Mapper.Map<ProcessedImageViewModel>(storedImage));
+        }
     }
 }

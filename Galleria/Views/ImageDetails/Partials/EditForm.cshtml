@@ -19,7 +19,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <input type="submit" class="btn btn-primary" value="Save" />
+        @Ajax.ActionLink("delete picture", "Delete", "ImageDetails", new { imageId = Model.Id }, new AjaxOptions { HttpMethod = "Post", OnSuccess = "deleteComplete" }, new { @class="btn btn-danger pull-left" })
+        <input type="submit" name="submitAction" class="btn btn-primary" value="save" />
     </div>
 }
 
@@ -33,6 +34,16 @@
             return currentImage.Id === data.Id;
         });
         viewModel.processedImages.replace(image, data);    
+        hideEditDialog();
+    }
+
+    function deleteComplete(data)
+    {
+        //find this image in the observable array
+        var image = ko.utils.arrayFirst(viewModel.processedImages(), function(currentImage) {
+            return currentImage.Id === data.Id;
+        });
+        viewModel.processedImages.remove(image);    
         hideEditDialog();
     }
 
