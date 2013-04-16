@@ -1,5 +1,6 @@
 ﻿using Galleria.Core.Services.FileStorage;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Galleria.Core.ImageProcessing
 {
@@ -23,7 +24,7 @@ namespace Galleria.Core.ImageProcessing
             info = new TaglibExtractor().ExtractTags(fileStorageService.GetFileStorageUri(savedFileInformation), input, info);
             if (string.IsNullOrWhiteSpace(info.Title))
             {
-                info.Title = savedFileInformation.UploadedFileName;
+                info.Title = MakeTitleFromFileName(savedFileInformation.UploadedFileName);
             }
 
             //probably want to do initial rotation here
@@ -34,6 +35,20 @@ namespace Galleria.Core.ImageProcessing
 
             info.Preview = thumbnailFile;
             return info;
+        }
+
+        private string MakeTitleFromFileName(string fileName)
+        {
+            int dotIndex = fileName.LastIndexOf('.');
+            if (dotIndex > -1)
+            {
+                fileName = fileName.Substring(0, dotIndex);
+            }
+
+            //todo: handle international characters
+            fileName = Regex.Replace(fileName, "[^A-Za-z0-9 _]", " ");
+
+            return fileName;
         }
     }
 }
