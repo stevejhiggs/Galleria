@@ -5,6 +5,6 @@ namespace Galleria.Core.RavenDb.Session
 {
     public interface IRavenDocumentSessionFactory
     {
-        IDocumentSession GetSession();
+        IDocumentSession GetSession(IDocumentStore documentStore);
     }
 }

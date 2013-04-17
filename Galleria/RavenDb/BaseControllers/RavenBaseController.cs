@@ -6,12 +6,17 @@ namespace Galleria.RavenDb.BaseControllers
 {
     public abstract class RavenBaseController : Controller
     {
-        public IDocumentSession RavenSession { get; protected set; }
+        public static IDocumentStore DocumentStore { get; set; }
+
+        public IDocumentSession RavenSession { get; set; }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            IRavenDocumentSessionFactory docSessionFactory = new RavenWebDocumentSessionFactory();
-            RavenSession = docSessionFactory.GetSession();
+            if (RavenSession == null)
+            {
+                IRavenDocumentSessionFactory docSessionFactory = new RavenWebDocumentSessionFactory();
+                RavenSession = docSessionFactory.GetSession(DocumentStore);
+            }
         }
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)

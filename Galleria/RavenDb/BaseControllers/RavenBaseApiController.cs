@@ -12,24 +12,14 @@ namespace Galleria.RavenDb.BaseControllers
 {
     public abstract class RavenBaseApiController : ApiController
     {
-        public IDocumentStore Store
-        {
-            get { return LazyDocStore.Value; }
-        }
-
-        private static readonly Lazy<IDocumentStore> LazyDocStore = new Lazy<IDocumentStore>(() =>
-        {
-            var docStore = RavenDocumentStore.Instance;
-            return docStore;
-        });
-
-        public IAsyncDocumentSession RavenSession { get; set; }
+        public static IDocumentStore DocumentStore { get; set; }
+        public IAsyncDocumentSession RavenSession { get; protected set; }
 
         public async override Task<HttpResponseMessage> ExecuteAsync(
             HttpControllerContext controllerContext,
             CancellationToken cancellationToken)
         {
-            using (RavenSession = Store.OpenAsyncSession())
+            using (RavenSession = DocumentStore.OpenAsyncSession())
             {
                 var result = await base.ExecuteAsync(controllerContext, cancellationToken);
                 await RavenSession.SaveChangesAsync();

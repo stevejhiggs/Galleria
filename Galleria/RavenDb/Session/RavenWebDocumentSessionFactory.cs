@@ -10,7 +10,7 @@ namespace Galleria.Core.RavenDb.Session
     {
         public const string ItemKey = "RavenSession";
 
-        public IDocumentSession GetSession()
+        public IDocumentSession GetSession(IDocumentStore documentStore)
         {
             IDocumentSession session = null;
             bool isCached = false;
@@ -27,7 +27,7 @@ namespace Galleria.Core.RavenDb.Session
 
             if (session == null)
             {
-                session = RavenDocumentStore.Instance.OpenSession();
+                session = documentStore.OpenSession();
             }
 
             if (session != null && !isCached)

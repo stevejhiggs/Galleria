@@ -1,4 +1,5 @@
 ﻿using Galleria.Core.RavenDb.Session;
+using Galleria.RavenDb.BaseControllers;
 using Raven.Client;
 
 namespace Galleria
@@ -7,7 +8,9 @@ namespace Galleria
     { 
         public static void SetupRaven()
         {
-            RavenDocumentStore.Initialize();
+            var documentStore = RavenDocumentStore.Initialize();
+            RavenBaseController.DocumentStore = documentStore;
+            RavenBaseApiController.DocumentStore = documentStore;
         }
     }
 }
