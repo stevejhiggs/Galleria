@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{96647C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galleria.Core", "Galleria.Core\Galleria.Core.csproj", "{116A9514-C8B0-40B1-9997-2209A15B011D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galleria.Tests.Unit", "Galleria.Tests.Unit\Galleria.Tests.Unit.csproj", "{73F60A40-7612-4DFE-8CCA-83371DB6CEDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5E91602B-E226-41DD-87A0-971ADCD3BDC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,8 +30,15 @@ Global
 		{116A9514-C8B0-40B1-9997-2209A15B011D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{116A9514-C8B0-40B1-9997-2209A15B011D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{116A9514-C8B0-40B1-9997-2209A15B011D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F60A40-7612-4DFE-8CCA-83371DB6CEDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F60A40-7612-4DFE-8CCA-83371DB6CEDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F60A40-7612-4DFE-8CCA-83371DB6CEDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F60A40-7612-4DFE-8CCA-83371DB6CEDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73F60A40-7612-4DFE-8CCA-83371DB6CEDB} = {5E91602B-E226-41DD-87A0-971ADCD3BDC3}
 	EndGlobalSection
 EndGlobal
