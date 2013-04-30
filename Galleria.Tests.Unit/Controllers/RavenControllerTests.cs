@@ -3,7 +3,9 @@ using Raven.Client;
 using Raven.Client.Embedded;
 using Raven.Client.Listeners;
 using System;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -46,6 +48,17 @@ namespace Galleria.Tests.Unit.Controllers
 		{
 			documentStore.Dispose();
 		}
+
+        protected async Task ExecuteApiAction<TController>(Action<TController> action) where TController : RavenBaseApiController, new()
+        {
+            var controller = new TController { RavenSession = documentStore.OpenAsyncSession() };
+
+            var httpContext = new Moq.Mock<HttpContextBase>();
+            httpContext.Setup(x => x.Response).Returns(new Moq.Mock<HttpResponseBase>().Object);
+            action(controller);
+
+            await controller.RavenSession.SaveChangesAsync();
+        }
 
 		protected void ExecuteAction<TController>(Action<TController> action) where TController: RavenBaseController, new()
 		{

@@ -13,7 +13,7 @@ namespace Galleria.RavenDb.BaseControllers
     public abstract class RavenBaseApiController : ApiController
     {
         public static IDocumentStore DocumentStore { get; set; }
-        public IAsyncDocumentSession RavenSession { get; protected set; }
+        public IAsyncDocumentSession RavenSession { get; set; }
 
         public async override Task<HttpResponseMessage> ExecuteAsync(
             HttpControllerContext controllerContext,
