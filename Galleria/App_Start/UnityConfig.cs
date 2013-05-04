@@ -2,32 +2,49 @@
 using Galleria.Core.Services.FileStorage.Implementations;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using System;
 using System.Configuration;
-using System.Web;
-using System.Web.Http;
-using System.Web.Mvc;
-using Unity.Mvc3;
 
 namespace Galleria
 {
+    /// <summary>
+    /// Specifies the Unity configuration for the main container.
+    /// </summary>
     public class UnityConfig
     {
-        public static void Initialise()
-        {
-            var container = BuildUnityContainer();
-            System.Web.Mvc.DependencyResolver.SetResolver(new Unity.Mvc3.UnityDependencyResolver(container));
-            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
-            UnityServiceLocator locator = new UnityServiceLocator(container);  
-            ServiceLocator.SetLocatorProvider(() => locator);
-        }
-
-        private static IUnityContainer BuildUnityContainer()
+        #region Unity Container
+        private static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
         {
             var container = new UnityContainer();
+            RegisterTypes(container);
 
-            container.RegisterType<IFileStorageService, ChunkedLocalFileSystemStorageService>(new ContainerControlledLifetimeManager(), 
+            UnityServiceLocator locator = new UnityServiceLocator(container);
+            ServiceLocator.SetLocatorProvider(() => locator);
+            return container;
+        });
+
+        /// <summary>
+        /// Gets the configured Unity container.
+        /// </summary>
+        public static IUnityContainer GetConfiguredContainer()
+        {
+            return container.Value;
+        }
+        #endregion
+
+        /// <summary>Registers the type mappings with the Unity container.</summary>
+        /// <param name="container">The unity container to configure.</param>
+        /// <remarks>There is no need to register concrete types such as controllers or API controllers (unless you want to 
+        /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
+        public static void RegisterTypes(IUnityContainer container)
+        {
+            // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
+            // container.LoadConfiguration();
+
+            // TODO: Register your types here
+            container.RegisterType<IFileStorageService, ChunkedLocalFileSystemStorageService>(new ContainerControlledLifetimeManager(),
                                                                                                 new InjectionConstructor(
-                                                                                                    ConfigurationManager.AppSettings["BlockPath"], 
+                                                                                                    ConfigurationManager.AppSettings["BlockPath"],
                                                                                                     ConfigurationManager.AppSettings["MediaPath"],
                                                                                                     ConfigurationManager.AppSettings["PreviewPath"]
                                                                                                 ));
@@ -38,8 +55,6 @@ namespace Galleria
                                                                                                             ConfigurationManager.AppSettings["MediaPath"],
                                                                                                             ConfigurationManager.AppSettings["PreviewPath"]
                                                                                                         ));
-
-            return container;
         }
     }
 }
