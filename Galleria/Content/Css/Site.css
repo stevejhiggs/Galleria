@@ -4,7 +4,7 @@
 body {
   background-color: #120023;
   background-color: #11345B;
-  background-image: url(Images/background.png);
+  background-image: url(../Images/background.png);
 }
 .navbar {
   margin-bottom: 2rem;
@@ -36,7 +36,7 @@ ul.btn-nav li {
   height: 20em;
 }
 #uploadBox {
-  background: url('images/cloudupload.png') no-repeat, url(Images/background.png) #bbbbbb;
+  background: url('../images/cloudupload.png') no-repeat, url(../Images/background.png) #bbbbbb;
   background-position: center;
   border: 3px dashed rgba(255, 255, 255, 0.4);
   border-radius: 8px;

@@ -5,7 +5,7 @@
 @section topnav {
     <ul class="btn-nav pull-right">
         <li>
-            <div class="btn-group" data-toggle="buttons-radio">
+            <div class="btn-group">
                 <a href="@Url.Action("Index", "Home")" class="btn btn-success navbar-btn active">list</a>
                 <a href="@Url.Action("Index", "Map")" class="btn btn-success navbar-btn">map</a>
             </div>
@@ -14,8 +14,8 @@
     </ul>
 }
 <div class="row">
-    <div class="col-lg-8 col-offset-2">
-        <input type="text" placeholder="search..." class="search-query" data-bind='value: searchValue, valueUpdate: "afterkeydown"' />
+    <div class="col-lg-8 col-lg-offset-2">
+        <input type="text" placeholder="search..." class="form-control search-query" data-bind='value: searchValue, valueUpdate: "afterkeydown"' />
     </div>   
 </div>
 

@@ -24,10 +24,10 @@ namespace Galleria
                         "~/Scripts/upload.js"));
 
             bundles.Add(new StyleBundle("~/Content/cssbase").Include(
-                        "~/Content/BootstrapCss/bootstrap.css",
-                        "~/Content/font-awesome.css",
-                        "~/Content/site.css",
-                        "~/Content/bootstrap-tagmanager.css"
+                        "~/Content/Css/bootstrap.css",
+                        "~/Content/Css/bootstrap-glyphicons.css",
+                        "~/Content/Css/site.css",
+                        "~/Content/Css/bootstrap-tagmanager.css"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/homepage").Include(

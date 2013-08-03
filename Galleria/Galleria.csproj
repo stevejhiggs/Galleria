@@ -216,18 +216,17 @@
     <Compile Include="ViewModels\SlideShowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\BootstrapCss\bootstrap.css" />
-    <Content Include="Content\font-awesome.css">
-      <DependentUpon>font-awesome.less</DependentUpon>
+    <Content Include="Content\Css\bootstrap-glyphicons.css">
+      <DependentUpon>bootstrap-glyphicons.less</DependentUpon>
     </Content>
-    <Content Include="Content\Fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Fonts\glyphiconshalflings-regular.svg" />
     <Content Include="Content\Images\background.png" />
     <Content Include="Content\Images\cloudupload.png" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
     <Content Include="Content\Images\ImagePlaceholder.png" />
-    <Content Include="Content\Site.css">
+    <Content Include="Content\Css\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
     <Content Include="Content\Supersized\css\supersized.css" />
@@ -248,7 +247,7 @@
     <Content Include="Content\Supersized\img\thumb-back.png" />
     <Content Include="Content\Supersized\img\thumb-forward.png" />
     <Content Include="Content\Supersized\theme\supersized.shutter.css" />
-    <Content Include="Content\Site.less" />
+    <Content Include="Content\Css\Site.less" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -311,21 +310,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
-    <Content Include="Content\bootstrap-tagmanager.css" />
+    <Content Include="Content\Css\bootstrap-tagmanager.css" />
     <Content Include="Scripts\bootstrap-tagmanager.js" />
-    <Content Include="Scripts\bootstrap.min.js.map">
-      <DependentUpon>bootstrap.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\Fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\Fonts\FontAwesome.otf" />
     <Content Include="Content\Fonts\glyphiconshalflings-regular.eot" />
     <Content Include="Content\Fonts\glyphiconshalflings-regular.otf" />
     <Content Include="Content\Fonts\glyphiconshalflings-regular.ttf" />
     <Content Include="Content\Fonts\glyphiconshalflings-regular.woff" />
-    <Content Include="Content\font-awesome.less" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Content\Css\bootstrap-glyphicons.less" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
