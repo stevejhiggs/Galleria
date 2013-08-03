@@ -46,7 +46,7 @@ namespace Galleria.Core.ImageProcessing
             }
 
             //todo: handle international characters
-            fileName = Regex.Replace(fileName, "[^A-Za-z0-9 _]", " ");
+            fileName = Regex.Replace(fileName, "[^A-Za-z0-9 ]", " ");
 
             return fileName;
         }
