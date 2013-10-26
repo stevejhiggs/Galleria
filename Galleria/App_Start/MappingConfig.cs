@@ -14,7 +14,8 @@ namespace Galleria
         {
             Mapper.CreateMap<StoredImage, ProcessedImageViewModel>()
                     .ForMember(m => m.Url, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.File))))
-                    .ForMember(m => m.PreviewUrl, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.Preview))));
+                    .ForMember(m => m.PreviewUrl, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.Preview))))
+					.ForMember(m => m.LazyLoadPlaceholderUrl, v => v.MapFrom(s => (ServiceLocator.Current.GetInstance<IFileStorageService>().GetFileStorageUri(s.Preview))));
 
             Mapper.CreateMap<ExtractedImageInformation, StoredImage>()
                     .ForMember(m => m.Id, v => v.MapFrom(s => Guid.NewGuid().ToString()));
