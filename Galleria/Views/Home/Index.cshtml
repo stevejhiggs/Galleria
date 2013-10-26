@@ -1,159 +1,153 @@
 ﻿@{
-    ViewBag.Title = "List";
+	ViewBag.Title = "List";
 }
 
 @section topnav {
-    <ul class="btn-nav pull-right">
-        <li>
-            <div class="btn-group">
-                <a href="@Url.Action("Index", "Home")" class="btn btn-success navbar-btn active">list</a>
-                <a href="@Url.Action("Index", "Map")" class="btn btn-success navbar-btn">map</a>
-            </div>
-        </li>
-        <li><a href="@Url.Action("Index", "Add")" class="btn btn-primary navbar-btn">add pictures</a></li>
-    </ul>
+	<ul class="btn-nav pull-right">
+		<li>
+			<div class="btn-group">
+				<a href="@Url.Action("Index", "Home")" class="btn btn-success navbar-btn active">list</a>
+				<a href="@Url.Action("Index", "Map")" class="btn btn-success navbar-btn">map</a>
+			</div>
+		</li>
+		<li><a href="@Url.Action("Index", "Add")" class="btn btn-primary navbar-btn">add pictures</a></li>
+	</ul>
 }
 <div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-        <input type="text" placeholder="search..." class="form-control search-query" data-bind='value: searchValue, valueUpdate: "afterkeydown"' />
-    </div>   
+	<div class="col-lg-8 col-lg-offset-2 col-sm-12">
+		<input type="text" placeholder="search..." class="form-control search-query" data-bind='value: searchValue, valueUpdate: "afterkeydown"' />
+	</div>
 </div>
 
 <div class="row">
-    <ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }">
-    </ul>
-    <script type="text/html" id="picture-template">
-        <li>
-            <div class="imageSurround">
-                <a data-bind="attr: { 'href': '@(Url.Action("Index", "Slideshow"))?startImageId=' + Id }">
-                    <img class="lazyImage" data-bind="attr: { src: LazyLoadPlaceholderUrl, 'data-original': PreviewUrl }" />
-                </a>
-                <div class="name"><span data-bind="text: Title">&nbsp;</span><a data-bind="click: showEditDialog" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
-            </div>
-        </li>
-    </script>
-</div>
-<div id="model-form" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editFormLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div id="modal-content-container" class="modal-content">
-        </div>
-    </div>
+	<div class="col-lg-12 col-sm-12">
+		<ul class="imageList" data-bind="template: { name: 'picture-template', foreach: processedImages }"></ul>
+		<script type="text/html" id="picture-template">
+			<li>
+				<div class="imageSurround">
+					<a data-bind="attr: { 'href': '@(Url.Action("Index", "Slideshow"))?startImageId=' + Id }">
+						<img class="lazyImage" data-bind="attr: { src: LazyLoadPlaceholderUrl, 'data-original': PreviewUrl }" />
+					</a>
+					<div class="name"><span data-bind="text: Title">&nbsp;</span><a data-bind="click: showEditDialog" href="#" data-target="#imageEditForm"><i class="glyphicon glyphicon-pencil"></i></a></div>
+				</div>
+			</li>
+		</script>
+	</div>
+	<div id="model-form" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editFormLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div id="modal-content-container" class="modal-content">
+			</div>
+		</div>
+	</div>
 </div>
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/homepage")
-    <script type="text/javascript" src="~/signalr/hubs"></script>
-    <script type="text/javascript">
-        var viewModel;
-        
-        $(function () {
-            viewModel = new homepageViewModel();
-            ko.applyBindings(viewModel);
+	@Scripts.Render("~/bundles/homepage")
+	<script type="text/javascript" src="~/signalr/hubs"></script>
+	<script type="text/javascript">
+		var viewModel;
 
-            setupSignalR();
-            showAllImages();
-            
-            $("a[data-modalform]").click(function () {
-                showEditDialog($(this));
-                return false;
-            });
-        });
+		$(function () {
+			viewModel = new homepageViewModel();
+			ko.applyBindings(viewModel);
 
-        function showAllImages()
-        {
-            jQuery.support.cors = true;
-            $.ajax({
-                url: '@Url.Content("~/api/imagecollection")',
-                type: 'GET',
-                dataType: 'json',            
-                success: function (data) {  
-                    refreshImageDisplay(data);
-                },
-                error: function (x, y, z) {
-                    alert(x + '\n' + y + '\n' + z);
-                }
-            });   
-        }
+			setupSignalR();
+			showAllImages();
 
-        function searchImages(searchText)
-        {
-            jQuery.support.cors = true;
-            $.ajax({
-                url: '@Url.Content("~/api/imagecollection")' + '?searchtext=' + searchText,
-                type: 'GET',
-                dataType: 'json',            
-                success: function (data) {  
-                    refreshImageDisplay(data);
-                },
-                error: function (x, y, z) {
-                    alert(x + '\n' + y + '\n' + z);
-                }
-            }); 
-        }
+			$("a[data-modalform]").click(function () {
+				showEditDialog($(this));
+				return false;
+			});
+		});
 
-        function refreshImageDisplay(images)
-        {
-            viewModel.processedImages.removeAll();
-            ko.utils.arrayPushAll(viewModel.processedImages(), images);
-            viewModel.processedImages.valueHasMutated();
-            $("img.lazyImage").lazyload({
-                effect: "fadeIn"
-            });
+		function showAllImages() {
+			jQuery.support.cors = true;
+			$.ajax({
+				url: '@Url.Content("~/api/imagecollection")',
+				type: 'GET',
+				dataType: 'json',
+				success: function (data) {
+					refreshImageDisplay(data);
+				},
+				error: function (x, y, z) {
+					alert(x + '\n' + y + '\n' + z);
+				}
+			});
+		}
 
-            $('body').trigger("lazyupdate");
+		function searchImages(searchText) {
+			jQuery.support.cors = true;
+			$.ajax({
+				url: '@Url.Content("~/api/imagecollection")' + '?searchtext=' + searchText,
+				type: 'GET',
+				dataType: 'json',
+				success: function (data) {
+					refreshImageDisplay(data);
+				},
+				error: function (x, y, z) {
+					alert(x + '\n' + y + '\n' + z);
+				}
+			});
+		}
 
-            setTimeout(function(){
-                $('body').trigger("lazyupdate");
-            }, 10);
-        }
+		function refreshImageDisplay(images) {
+			viewModel.processedImages.removeAll();
+			ko.utils.arrayPushAll(viewModel.processedImages(), images);
+			viewModel.processedImages.valueHasMutated();
+			$("img.lazyImage").lazyload({
+				effect: "fadeIn"
+			});
 
-        function setupSignalR()
-        {
-            // Proxy created on the fly          
-            var pictureprocesshub = $.connection.pictureProcessHub;
+			$('body').trigger("lazyupdate");
 
-            // Declare a function on the chat hub so the server can invoke it          
-            pictureprocesshub.client.pictureprocessed = function (image) {
-                image.LazyLoadUrl = image.PreviewUrl;
-                viewModel.processedImages.push(image);
-                $("img.lazyImage").lazyload();
-            };
+			setTimeout(function () {
+				$('body').trigger("lazyupdate");
+			}, 10);
+		}
 
-            // Start the connection
-            $.connection.hub.start();  
-        }
+		function setupSignalR() {
+			// Proxy created on the fly
+			var pictureprocesshub = $.connection.pictureProcessHub;
 
-        function showEditDialog(src)
-        {
-            var href = '/ImageDetails/Edit?Id=' + src.Id;;
-            //load destination via ajax
-            $.get(href, function (data) {
-                //inject into modal container
-                $("#modal-content-container").html(data);
-                $('#model-form').modal();
-            })
+			// Declare a function on the chat hub so the server can invoke it
+			pictureprocesshub.client.pictureprocessed = function (image) {
+				image.LazyLoadUrl = image.PreviewUrl;
+				viewModel.processedImages.push(image);
+				$("img.lazyImage").lazyload();
+			};
 
-            return false;
-        }
+			// Start the connection
+			$.connection.hub.start();
+		}
 
-        function hideEditDialog()
-        {
-            $('#model-form').modal('hide')
-        }
+		function showEditDialog(src) {
+			var href = '/ImageDetails/Edit?Id=' + src.Id;;
+			//load destination via ajax
+			$.get(href, function (data) {
+				//inject into modal container
+				$("#modal-content-container").html(data);
+				$('#model-form').modal();
+			})
 
-        function homepageViewModel()
-        {
-            this.processedImages =  ko.observableArray([]);
+			return false;
+		}
 
-            this.searchValue = ko.observable();
-            this.throttledSearchValue = ko.computed(this.searchValue)
+		function hideEditDialog() {
+			$('#model-form').modal('hide')
+		}
+
+		function homepageViewModel() {
+			this.processedImages = ko.observableArray([]);
+
+			this.searchValue = ko.observable();
+			this.throttledSearchValue = ko.computed(this.searchValue)
                                     .extend({ throttle: 400 });
 
-            this.throttledSearchValue.subscribe(function (val) {
-                searchImages(val);
-            }, this);
-        }
+			this.throttledSearchValue.subscribe(function (val) {
+				searchImages(val);
+			}, this);
+		}
 
-    </script>
+	</script>
 }
