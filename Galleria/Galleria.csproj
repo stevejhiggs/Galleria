@@ -199,7 +199,7 @@
     <Compile Include="Controllers\ImageDetailsController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\Api\ImageCollectionController.cs" />
-    <Compile Include="OwinConfig.cs" />
+    <Compile Include="App_Start\OwinConfig.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseApiController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseController.cs" />
     <Compile Include="Controllers\SlideshowController.cs" />
