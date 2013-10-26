@@ -224,6 +224,9 @@
       <DependentUpon>bootstrap-glyphicons.less</DependentUpon>
     </Content>
     <Content Include="Content\Css\bootstrap.css" />
+    <Content Include="Content\Css\Site.min.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Fonts\glyphiconshalflings-regular.svg" />
     <Content Include="Content\Images\background.png" />
