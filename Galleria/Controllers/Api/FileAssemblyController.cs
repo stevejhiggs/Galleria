@@ -33,20 +33,24 @@ namespace Galleria.Controllers.Api
 		[Route("assemble")]
         public async Task<SavedFile> Assemble(FileAssemblyRequest item)
         {
-			
-
             SavedFile savedFileInformation = await ChunkedFileStorageService.AssembleFileFromBlocksAsync(item);
+
+			//todo, get file information back from save call
+			byte[] fileContents = ChunkedFileStorageService.RetrieveFileContents(savedFileInformation);
 
             string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);
             string mappedThumbnailPath = HttpContext.Current.Server.MapPath(thumbnailPath);
 
-            //process the image
-            //TODO: Thumbnail writing should be handled via the file service
+			ExtractedImageInformation exInfo = new ExtractedImageInformation();
+			exInfo.File = savedFileInformation;
+
             InformationExtractor extractor = new InformationExtractor();
             extractor.ImagePathBase = mappedFilePath;
-            extractor.ThumbnailPathBase = mappedThumbnailPath;
-            extractor.ThumbnailMaxHeight = 200;
-            ExtractedImageInformation exInfo = extractor.GetImageInformation(savedFileInformation, ChunkedFileStorageService);
+			extractor.GetImageInformation(savedFileInformation, fileContents, savedFileInformation.StorageFileName, ref exInfo);
+
+			//generate thumbnail
+			byte[] thumbnailBytes = new ThumbnailGenerator().GenerateThumbnail(fileContents);
+			exInfo.Preview = ChunkedFileStorageService.SaveFileWithoutChunking(savedFileInformation.UploadedFileName, "thumbnail", thumbnailBytes);
 
             //write to raven
             StoredImage info = Mapper.Map<StoredImage>(exInfo);

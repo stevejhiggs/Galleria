@@ -1,12 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
+using Microsoft.Practices.Unity.WebApi;
 using Owin;
 using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Optimization;
-using Microsoft.Practices.Unity.WebApi;
+using System.Web.Routing;
 
 [assembly: OwinStartup(typeof(Galleria.App_Start.Startup))]
 
