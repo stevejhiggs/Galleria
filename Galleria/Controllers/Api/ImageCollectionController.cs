@@ -7,12 +7,16 @@ using Raven.Client;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 
-namespace Galleria.Controllers
+namespace Galleria.Controllers.Api
 {
+	[RoutePrefix("api")]
     public class ImageCollectionController : RavenBaseApiController
     {
-        public async Task<IEnumerable<ProcessedImageViewModel>> Get(string searchText = null)
+		[HttpGet]
+		[Route("Images/{searchText?}")]
+        public async Task<IEnumerable<ProcessedImageViewModel>> SearchByName(string searchText = null)
         {
             IList<StoredImage> results = null;
 

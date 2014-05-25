@@ -8,8 +8,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Galleria.Controllers
+namespace Galleria.Controllers.Api
 {
+	[RoutePrefix("api/files")]
     public class UploadingController : RavenBaseApiController
     {
         IChunkedFileStorageService ChunkedFileStorageService;
@@ -18,8 +19,10 @@ namespace Galleria.Controllers
         {
             ChunkedFileStorageService = chunkedFileStorageService;
         }
-
-        public Task<IEnumerable<SavedBlock>> Post()
+		
+		[Route("upload")]
+		[HttpPost]
+        public Task<IEnumerable<SavedBlock>> Uploading()
         {
             try
             {

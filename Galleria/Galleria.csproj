@@ -213,7 +213,7 @@
     <Compile Include="RavenDb\BaseControllers\RavenBaseApiController.cs" />
     <Compile Include="RavenDb\BaseControllers\RavenBaseController.cs" />
     <Compile Include="Controllers\SlideshowController.cs" />
-    <Compile Include="Controllers\UploadingController.cs" />
+    <Compile Include="Controllers\Api\UploadingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

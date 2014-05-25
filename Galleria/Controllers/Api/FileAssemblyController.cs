@@ -10,9 +10,11 @@ using System;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 
-namespace Galleria.Controllers
+namespace Galleria.Controllers.Api
 {
+	[RoutePrefix("api/files")]
     public class FileAssemblyController : RavenBaseApiController
     {
         IChunkedFileStorageService ChunkedFileStorageService;
@@ -27,9 +29,12 @@ namespace Galleria.Controllers
             thumbnailPath = ConfigurationManager.AppSettings["PreviewPath"];
         }
 
-        // GET api/fileassembly
-        public async Task<SavedFile> Post(FileAssemblyRequest item)
+		[HttpPost]
+		[Route("assemble")]
+        public async Task<SavedFile> Assemble(FileAssemblyRequest item)
         {
+			
+
             SavedFile savedFileInformation = await ChunkedFileStorageService.AssembleFileFromBlocksAsync(item);
 
             string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);

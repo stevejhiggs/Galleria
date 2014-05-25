@@ -77,7 +77,7 @@ function upload(fileIndex, blobIndex, blobOrFile) {
     data.append(fileIndex + "," + blobIndex, blobOrFile);
     $.ajax({
         type: "POST",
-        url: "/api/uploading",
+        url: "/api/files/upload",
         contentType: false,
         processData: false,
         data: data,
@@ -118,7 +118,7 @@ function sendFileCompleteMessage(fileIndex) {
 
     $.ajax({
         type: "POST",
-        url: "/api/fileassembly",
+        url: "/api/files/assemble",
         dataType: 'json',
         data: { Filename: filename, Blocks: blocks },
         success: function (res) {

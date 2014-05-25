@@ -64,7 +64,7 @@
 		function showAllImages() {
 			jQuery.support.cors = true;
 			$.ajax({
-				url: '@Url.Content("~/api/imagecollection")',
+				url: '@Url.Content("~/api/images")',
 				type: 'GET',
 				dataType: 'json',
 				success: function (data) {
@@ -79,7 +79,7 @@
 		function searchImages(searchText) {
 			jQuery.support.cors = true;
 			$.ajax({
-				url: '@Url.Content("~/api/imagecollection")' + '?searchtext=' + searchText,
+				url: '@Url.Content("~/api/images/")'+ searchText,
 				type: 'GET',
 				dataType: 'json',
 				success: function (data) {

@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
-using Galleria.Controllers;
-using Galleria.Tests.Unit.Controllers;
-using System.Collections;
+﻿using Galleria.Controllers.Api;
 using Galleria.ViewModels;
+using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Galleria.Tests.Unit.Controllers.Api
@@ -19,7 +16,7 @@ namespace Galleria.Tests.Unit.Controllers.Api
 
             await ExecuteApiAction<ImageCollectionController>(async controller =>
             {
-                results = await controller.Get();
+                results = await controller.SearchByName();
             });
         }
     }
