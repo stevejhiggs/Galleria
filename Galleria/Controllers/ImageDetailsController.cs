@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Galleria.Core.Models;
-using Galleria.Core.Services.FileStorage;
+using Galleria.Core.FileStorage;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
 using Newtonsoft.Json;

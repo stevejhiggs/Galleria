@@ -1,22 +1,22 @@
-﻿using Galleria.Core.Services.FileStorage;
+﻿using Galleria.Core.FileStorage;
 using System.Text.RegularExpressions;
 
 namespace Galleria.Core.ImageProcessing
 {
     public class InformationExtractor
     {
-        public string ImagePathBase { get; set;}
-
-        public void GetImageInformation(SavedFile savedFileInformation, byte[] fileContents, string fileStorageUri, ref ExtractedImageInformation info)
+		public ExtractedImageInformation GetImageInformation(SavedFile savedFileInformation, byte[] fileContents, ExtractedImageInformation info)
         {
 
             //TODO, I Should be a parallel async call
-            
-			info = new TaglibExtractor().ExtractTags(fileStorageUri, fileContents, info);
+
+			info = new TaglibExtractor().ExtractTags(savedFileInformation.StorageFileName, fileContents, info);
             if (string.IsNullOrWhiteSpace(info.Title))
             {
                 info.Title = MakeTitleFromFileName(savedFileInformation.UploadedFileName);
             }
+
+			return info;
         }
 
         private string MakeTitleFromFileName(string fileName)

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Galleria.Core.Models;
+using Galleria.Core.FileStorage;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
 using System.Collections.Generic;

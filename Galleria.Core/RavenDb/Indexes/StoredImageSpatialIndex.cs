@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Galleria.Core.Models;
 using Raven.Client.Indexes;
+using Galleria.Core.FileStorage;
 
 namespace Galleria.Core.RavenDb.Indexes
 {

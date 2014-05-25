@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Galleria.Core.ImageProcessing;
-using Galleria.Core.Models;
-using Galleria.Core.Services.FileStorage;
+using Galleria.Core.FileStorage;
 using Galleria.ViewModels;
 using Microsoft.Practices.ServiceLocation;
 using System;

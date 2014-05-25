@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Galleria.Core.ImageProcessing;
-using Galleria.Core.Models;
-using Galleria.Core.Services.FileStorage;
+using Galleria.Core.FileStorage;
 using Galleria.Hubs;
 using Galleria.RavenDb.BaseControllers;
 using Galleria.ViewModels;
@@ -25,8 +24,6 @@ namespace Galleria.Controllers.Api
         public FileAssemblyController(IChunkedFileStorageService chunkedFileStorageService)
         {
             ChunkedFileStorageService = chunkedFileStorageService;
-            mediapath = ConfigurationManager.AppSettings["MediaPath"];
-            thumbnailPath = ConfigurationManager.AppSettings["PreviewPath"];
         }
 
 		[HttpPost]
@@ -38,15 +35,11 @@ namespace Galleria.Controllers.Api
 			//todo, get file information back from save call
 			byte[] fileContents = ChunkedFileStorageService.RetrieveFileContents(savedFileInformation);
 
-            string mappedFilePath = HttpContext.Current.Server.MapPath(mediapath);
-            string mappedThumbnailPath = HttpContext.Current.Server.MapPath(thumbnailPath);
-
 			ExtractedImageInformation exInfo = new ExtractedImageInformation();
 			exInfo.File = savedFileInformation;
 
             InformationExtractor extractor = new InformationExtractor();
-            extractor.ImagePathBase = mappedFilePath;
-			extractor.GetImageInformation(savedFileInformation, fileContents, savedFileInformation.StorageFileName, ref exInfo);
+			exInfo = extractor.GetImageInformation(savedFileInformation, fileContents, exInfo);
 
 			//generate thumbnail
 			byte[] thumbnailBytes = new ThumbnailGenerator().GenerateThumbnail(fileContents);

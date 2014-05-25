@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using Galleria.Core.Models;
-using Galleria.RavenDb.BaseControllers;
-using Galleria.ViewModels;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Galleria.RavenDb.BaseControllers;
 using System.Web.Mvc;
 
 namespace Galleria.Controllers

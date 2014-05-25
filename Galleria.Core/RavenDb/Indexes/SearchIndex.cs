@@ -1,4 +1,4 @@
-﻿using Galleria.Core.Models;
+﻿using Galleria.Core.FileStorage;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 using System;

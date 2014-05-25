@@ -1,5 +1,5 @@
-﻿using Galleria.Core.Services.FileStorage;
-using Galleria.Core.Services.FileStorage.Implementations;
+﻿using Galleria.Core.FileStorage;
+using Galleria.Core.FileStorage.Implementations;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using System;

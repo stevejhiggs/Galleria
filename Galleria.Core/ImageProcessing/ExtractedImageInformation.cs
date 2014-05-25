@@ -1,4 +1,4 @@
-﻿using Galleria.Core.Services.FileStorage;
+﻿using Galleria.Core.FileStorage;
 using System;
 
 namespace Galleria.Core.ImageProcessing
